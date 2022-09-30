@@ -49,9 +49,9 @@ class GithubVjchoirArchivesApi extends VjchoirArchivesApi {
       for (final comm in batch.comms) {
         newComms.add(
           comm.copyWith(
-            img: p.normalize(
-              'https://$_baseUrl/$_assetPath/${comm.img.replaceFirst('../', '')}',
-            ),
+            img: 'https://${p.normalize(
+              '$_baseUrl/$_assetPath/${comm.img.replaceFirst('../', '')}',
+            )}',
           ),
         );
       }
@@ -62,18 +62,18 @@ class GithubVjchoirArchivesApi extends VjchoirArchivesApi {
         newPhotos = [];
         for (final photo in photos) {
           newPhotos.add(
-            p.normalize(
-              'https://$_baseUrl/$_assetPath/${photo.replaceFirst('../', '')}',
-            ),
+            'https://${p.normalize(
+              '$_baseUrl/$_assetPath/${photo.replaceFirst('../', '')}',
+            )}',
           );
         }
       }
 
       newBatches.add(
         batch.copyWith(
-          image: p.normalize(
-            'https://$_baseUrl/$_assetPath/${batch.image.replaceFirst('../', '')}',
-          ),
+          image: 'https://${p.normalize(
+            '$_baseUrl/$_assetPath/${batch.image.replaceFirst('../', '')}',
+          )}',
           comms: newComms,
           photos: newPhotos,
         ),

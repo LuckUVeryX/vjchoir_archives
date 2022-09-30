@@ -9,6 +9,9 @@ import 'dart:async';
 import 'dart:developer';
 
 import 'package:flutter/widgets.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:github_vjchoir_archives_api/github_vjchoir_archives_api.dart';
+import 'package:vjchoir_archives/app/providers.dart';
 
 // class AppBlocObserver extends BlocObserver {
 //   @override
@@ -29,10 +32,17 @@ Future<void> bootstrap(FutureOr<Widget> Function() builder) async {
     log(details.exceptionAsString(), stackTrace: details.stack);
   };
 
-  // Bloc.observer = AppBlocObserver();
-
   await runZonedGuarded(
-    () async => runApp(await builder()),
+    () async => runApp(
+      ProviderScope(
+        overrides: [
+          vjchoirArchivesApiProvider.overrideWithValue(
+            GithubVjchoirArchivesApi(),
+          ),
+        ],
+        child: await builder(),
+      ),
+    ),
     (error, stackTrace) => log(error.toString(), stackTrace: stackTrace),
   );
 }

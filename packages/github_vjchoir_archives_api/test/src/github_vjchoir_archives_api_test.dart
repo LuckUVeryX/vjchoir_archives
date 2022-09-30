@@ -10,6 +10,7 @@ import 'package:http/http.dart' as http;
 import 'package:mocktail/mocktail.dart';
 // ignore_for_file: prefer_const_constructors
 import 'package:test/test.dart';
+import 'package:vjchoir_archives_api/vjchoir_archives_api.dart';
 
 class MockHttpClient extends Mock implements http.Client {}
 

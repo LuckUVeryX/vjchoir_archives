@@ -7,6 +7,15 @@
 
 import 'package:vjchoir_archives_api/src/models/models.dart';
 
+/// Exception thrown when getBatches fail.
+class BatchesRequestFailure implements VjchoirArchivesApiException {}
+
+/// Exception thrown when getSymphonyOfVoices fail.
+class SymphonyOfVoicesRequestFailure implements VjchoirArchivesApiException {}
+
+/// Custom API exception
+class VjchoirArchivesApiException implements Exception {}
+
 /// {@template vjchoir_archives_api}
 /// Vjchoir Archives Api
 /// {@endtemplate}

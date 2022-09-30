@@ -10,12 +10,6 @@ import 'package:http/http.dart' as http;
 import 'package:path/path.dart' as p;
 import 'package:vjchoir_archives_api/vjchoir_archives_api.dart';
 
-/// Exception thrown when getBatches fail.
-class BatchesRequestFailure implements Exception {}
-
-/// Exception thrown when getSymphonyOfVoices fail.
-class SymphonyOfVoicesRequestFailure implements Exception {}
-
 /// {@template github_vjchoir_archives_api}
 /// Github Vjchoir Archives Api that wraps the [Vjchoir Github Repo](https://github.com/vjchoir/vjchoir.github.io)
 /// {@endtemplate}

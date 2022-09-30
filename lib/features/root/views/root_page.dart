@@ -12,7 +12,6 @@ class RootPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
       body: child,
       drawer: const RootPageDrawer(),
     );

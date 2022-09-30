@@ -1,7 +1,35 @@
 {
     "@@locale": "en",
-    "counterAppBarTitle": "Counter",
-    "@counterAppBarTitle": {
-        "description": "Text shown in the AppBar of the Counter Page"
+    "landingDone": "Done",
+    "@landingDone": {
+        "description": "Landing page done text button"
+    },
+    "landingSkip": "Skip",
+    "@landingSkip": {
+        "description": "Landing page done skip button"
+    },
+    "landingArchivesTitle": "Archives",
+    "@landingArchivesTitle": {
+        "description": "Landing page Archives title"
+    },
+    "landingBatchesTitle": "Batches",
+    "@landingBatchesTitle": {
+        "description": "Landing page Batches title"
+    },
+    "landingSymphonyOfVoicesTitle": "Symphony of Voices",
+    "@landingSymphonyOfVoicesTitle": {
+        "description": "Landing page Symphony of Voices title"
+    },
+    "landingArchivesBody": "The unofficial official app for the Victoria Junior College Choir.",
+    "@landingArchivesBody": {
+        "description": "Landing page Archives body"
+    },
+    "landingBatchesBody": "Discovery the history of each Vjchoir batch past and present.",
+    "@landingBatchesBody": {
+        "description": "Landing page Batches body"
+    },
+    "landingSymphonyOfVoicesBody": "Relive the performances from Vjchoir's annual concert throughtout the years.",
+    "@landingSymphonyOfVoicesBody": {
+        "description": "Landing page Symphony of Voices body"
     }
 }

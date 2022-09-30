@@ -13,19 +13,21 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:github_vjchoir_archives_api/github_vjchoir_archives_api.dart';
 import 'package:vjchoir_archives/app/providers.dart';
 
-// class AppBlocObserver extends BlocObserver {
-//   @override
-//   void onChange(BlocBase<dynamic> bloc, Change<dynamic> change) {
-//     super.onChange(bloc, change);
-//     log('onChange(${bloc.runtimeType}, $change)');
-//   }
-
-//   @override
-//   void onError(BlocBase<dynamic> bloc, Object error, StackTrace stackTrace) {
-//     log('onError(${bloc.runtimeType}, $error, $stackTrace)');
-//     super.onError(bloc, error, stackTrace);
-//   }
-// }
+class AppProviderObserver extends ProviderObserver {
+  @override
+  void didUpdateProvider(
+    ProviderBase<dynamic> provider,
+    Object? previousValue,
+    Object? newValue,
+    ProviderContainer container,
+  ) {
+    log('''
+{
+  "provider": "${provider.name ?? provider.runtimeType}",
+  "newValue": "$newValue"
+}''');
+  }
+}
 
 Future<void> bootstrap(FutureOr<Widget> Function() builder) async {
   FlutterError.onError = (details) {
@@ -35,6 +37,7 @@ Future<void> bootstrap(FutureOr<Widget> Function() builder) async {
   await runZonedGuarded(
     () async => runApp(
       ProviderScope(
+        observers: [AppProviderObserver()],
         overrides: [
           vjchoirArchivesApiProvider.overrideWithValue(
             GithubVjchoirArchivesApi(),

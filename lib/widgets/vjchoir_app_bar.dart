@@ -9,6 +9,7 @@ class VjchoirAppBar extends StatelessWidget with PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
+      centerTitle: true,
       title: Assets.logos.vjchoir
           .svg(fit: BoxFit.scaleDown, height: kToolbarHeight),
     );

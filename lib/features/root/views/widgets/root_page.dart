@@ -4,8 +4,8 @@ import 'package:vjchoir_archives/gen/assets.gen.dart';
 import 'package:vjchoir_archives/l10n/l10n.dart';
 import 'package:vjchoir_archives/utils/utils.dart';
 
-class HomePageDrawer extends StatelessWidget {
-  const HomePageDrawer({
+class RootPageDrawer extends StatelessWidget {
+  const RootPageDrawer({
     super.key,
   });
 

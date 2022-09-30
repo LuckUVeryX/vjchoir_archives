@@ -1,8 +1,8 @@
 import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:vjchoir_archives/features/home/home.dart';
 import 'package:vjchoir_archives/features/landing/landing.dart';
+import 'package:vjchoir_archives/features/root/root.dart';
 
 export 'package:go_router/go_router.dart';
 
@@ -33,7 +33,7 @@ class RouterNotifier extends ChangeNotifier {
       ),
       ShellRoute(
         navigatorKey: _homeNavigatorKey,
-        builder: (context, state, child) => HomePage(child: child),
+        builder: (context, state, child) => RootPage(child: child),
         routes: [
           GoRoute(
             path: Routes.home,

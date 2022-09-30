@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:vjchoir_archives/features/home/views/widgets/widgets.dart';
+import 'package:vjchoir_archives/features/root/views/widgets/widgets.dart';
 
-class HomePage extends StatelessWidget {
-  const HomePage({
+class RootPage extends StatelessWidget {
+  const RootPage({
     super.key,
     required this.child,
   });
@@ -14,7 +14,7 @@ class HomePage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(),
       body: child,
-      drawer: const HomePageDrawer(),
+      drawer: const RootPageDrawer(),
     );
   }
 }

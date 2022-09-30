@@ -1,7 +1,8 @@
 import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:vjchoir_archives/features/landing/views/landing_page.dart';
+import 'package:vjchoir_archives/features/home/home.dart';
+import 'package:vjchoir_archives/features/landing/landing.dart';
 
 final routerProvider = Provider<GoRouter>((ref) {
   final router = RouterNotifier();
@@ -26,10 +27,15 @@ class RouterNotifier extends ChangeNotifier {
         path: Routes.landing,
         builder: (context, state) => const LandingPage(),
       ),
+      GoRoute(
+        path: Routes.home,
+        builder: (context, state) => const HomePage(),
+      ),
     ];
   }
 }
 
 abstract class Routes {
   static const landing = '/';
+  static const home = '/home';
 }

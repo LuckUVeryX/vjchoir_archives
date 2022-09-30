@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:vjchoir_archives/app/router.dart';
 import 'package:vjchoir_archives/gen/assets.gen.dart';
 import 'package:vjchoir_archives/l10n/l10n.dart';
 import 'package:vjchoir_archives/utils/utils.dart';
@@ -37,7 +38,10 @@ class HomePageDrawer extends StatelessWidget {
               l10n.drawerHome,
               style: listTileTextStyle,
             ),
-            onTap: () {},
+            onTap: () {
+              context.go(Routes.home);
+              Navigator.of(context).pop();
+            },
           ),
           ListTile(
             leading: Icon(
@@ -48,7 +52,10 @@ class HomePageDrawer extends StatelessWidget {
               l10n.drawerBatches,
               style: listTileTextStyle,
             ),
-            onTap: () {},
+            onTap: () {
+              context.go(Routes.batches);
+              Navigator.of(context).pop();
+            },
           ),
           ListTile(
             leading: Icon(
@@ -59,7 +66,10 @@ class HomePageDrawer extends StatelessWidget {
               l10n.drawerSymphonyOfVoices,
               style: listTileTextStyle,
             ),
-            onTap: () {},
+            onTap: () {
+              context.go(Routes.symphonyOfVoices);
+              Navigator.of(context).pop();
+            },
           ),
         ],
       ),

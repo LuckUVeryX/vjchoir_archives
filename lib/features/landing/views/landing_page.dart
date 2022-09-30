@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:introduction_screen/introduction_screen.dart';
 import 'package:vjchoir_archives/app/router.dart';
 import 'package:vjchoir_archives/l10n/l10n.dart';

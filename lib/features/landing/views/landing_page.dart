@@ -20,20 +20,20 @@ class LandingPage extends StatelessWidget {
         pages: [
           PageViewModel(
             decoration: pageDecoration,
-            title: l10n.landingArchivesTitle,
-            body: l10n.landingArchivesBody,
+            title: l10n.landingTitleArchives,
+            body: l10n.landingBodyArchives,
             image: const _PageImage(iconData: Icons.archive_rounded),
           ),
           PageViewModel(
             decoration: pageDecoration,
-            title: l10n.landingBatchesTitle,
-            body: l10n.landingBatchesBody,
+            title: l10n.landingTitleBatches,
+            body: l10n.landingBodyBatches,
             image: const _PageImage(iconData: Icons.people_rounded),
           ),
           PageViewModel(
             decoration: pageDecoration,
-            title: l10n.landingSymphonyOfVoicesTitle,
-            body: l10n.landingSymphonyOfVoicesBody,
+            title: l10n.landingTitleSymphonyOfVoices,
+            body: l10n.landingBodySymphonyOfVoices,
             image: const _PageImage(iconData: Icons.music_note_rounded),
           ),
         ],

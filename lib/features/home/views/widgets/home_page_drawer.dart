@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:vjchoir_archives/gen/assets.gen.dart';
+import 'package:vjchoir_archives/l10n/l10n.dart';
 import 'package:vjchoir_archives/utils/utils.dart';
 
 class HomePageDrawer extends StatelessWidget {
@@ -12,6 +13,9 @@ class HomePageDrawer extends StatelessWidget {
     final listTileTextStyle = context.textTheme.titleMedium
         ?.copyWith(color: context.colorScheme.onPrimary);
     final listTileIconColor = context.colorScheme.onPrimary;
+
+    final l10n = context.l10n;
+
     return Drawer(
       backgroundColor: context.colorScheme.primary,
       child: ListView(
@@ -30,7 +34,7 @@ class HomePageDrawer extends StatelessWidget {
               color: listTileIconColor,
             ),
             title: Text(
-              'HOME',
+              l10n.drawerHome,
               style: listTileTextStyle,
             ),
             onTap: () {},
@@ -41,7 +45,7 @@ class HomePageDrawer extends StatelessWidget {
               color: listTileIconColor,
             ),
             title: Text(
-              'BATCHES',
+              l10n.drawerBatches,
               style: listTileTextStyle,
             ),
             onTap: () {},
@@ -52,7 +56,7 @@ class HomePageDrawer extends StatelessWidget {
               color: listTileIconColor,
             ),
             title: Text(
-              'SYMPHONY OF VOICES',
+              l10n.drawerSymphonyOfVoices,
               style: listTileTextStyle,
             ),
             onTap: () {},

@@ -8,28 +8,40 @@
     "@landingSkip": {
         "description": "Landing page done skip button"
     },
-    "landingArchivesTitle": "Archives",
-    "@landingArchivesTitle": {
+    "landingTitleArchives": "Archives",
+    "@landingTitleArchives": {
         "description": "Landing page Archives title"
     },
-    "landingBatchesTitle": "Batches",
-    "@landingBatchesTitle": {
+    "landingTitleBatches": "Batches",
+    "@landingTitleBatches": {
         "description": "Landing page Batches title"
     },
-    "landingSymphonyOfVoicesTitle": "Symphony of Voices",
-    "@landingSymphonyOfVoicesTitle": {
+    "landingTitleSymphonyOfVoices": "Symphony of Voices",
+    "@landingTitleSymphonyOfVoices": {
         "description": "Landing page Symphony of Voices title"
     },
-    "landingArchivesBody": "The unofficial official app for the Victoria Junior College Choir.",
-    "@landingArchivesBody": {
+    "landingBodyArchives": "The unofficial official app for the Victoria Junior College Choir.",
+    "@landingBodyArchives": {
         "description": "Landing page Archives body"
     },
-    "landingBatchesBody": "Discovery the history of each Vjchoir batch past and present.",
-    "@landingBatchesBody": {
+    "landingBodyBatches": "Discovery the history of each Vjchoir batch past and present.",
+    "@landingBodyBatches": {
         "description": "Landing page Batches body"
     },
-    "landingSymphonyOfVoicesBody": "Relive the performances from Vjchoir's annual concert throughtout the years.",
-    "@landingSymphonyOfVoicesBody": {
+    "landingBodySymphonyOfVoices": "Relive the performances from Vjchoir's annual concert throughtout the years.",
+    "@landingBodySymphonyOfVoices": {
         "description": "Landing page Symphony of Voices body"
+    },
+    "drawerHome": "HOME",
+    "@drawerHome": {
+        "description": "Label for home list tile in drawer"
+    },
+    "drawerBatches": "BATCHES",
+    "@drawerBatches": {
+        "description": "Label for batches list tile in drawer"
+    },
+    "drawerSymphonyOfVoices": "SYMPHONY OF VOICES",
+    "@drawerSymphonyOfVoices": {
+        "description": "Label for Symphony of voices list tile in drawer"
     }
 }

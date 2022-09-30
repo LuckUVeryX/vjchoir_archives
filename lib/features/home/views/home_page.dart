@@ -32,6 +32,7 @@ class HomePage extends ConsumerWidget {
     final headers = buildHeaders(context);
 
     return CustomScrollView(
+      cacheExtent: 9999, // Increase cache size to avoid rebuilding image.
       slivers: [
         const SliverAppBar(),
         SliverList(
@@ -54,8 +55,6 @@ class HomePage extends ConsumerWidget {
                 error: (error, stackTrace) => Text(error.toString()),
                 data: (data) => CachedNetworkImage(
                   imageUrl: data[index - headers.length],
-                  placeholder: (context, url) =>
-                      const CircularProgressIndicator.adaptive(),
                 ),
               );
             },

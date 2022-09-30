@@ -43,5 +43,17 @@
     "drawerSymphonyOfVoices": "SYMPHONY OF VOICES",
     "@drawerSymphonyOfVoices": {
         "description": "Label for Symphony of voices list tile in drawer"
+    },
+    "homeWelcomeTitle": "Welcome to the...",
+    "@homeWelcomeTitle": {
+        "description": "Home page title"
+    },
+    "homeWelcomeBody": "Welcome to the unofficial official webpage for the Victoria Junior College Choir. This website is a repository of batch information, songs, concerts and other cool stuff for you to peruse. Enjoy!",
+    "@homeWelcomeBody": {
+        "description": "Home page body"
+    },
+    "homeFeaturedPhotos": "Featured Photos",
+    "@homeFeaturedPhotos": {
+        "description": "Featured Photos header"
     }
 }

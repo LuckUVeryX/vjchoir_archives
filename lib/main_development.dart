@@ -5,10 +5,9 @@
 // license that can be found in the LICENSE file or at
 // https://opensource.org/licenses/MIT.
 
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:vjchoir_archives/app/app.dart';
 import 'package:vjchoir_archives/bootstrap.dart';
 
 void main() {
-  bootstrap(() => const ProviderScope(child: App()));
+  bootstrap(() => const App());
 }

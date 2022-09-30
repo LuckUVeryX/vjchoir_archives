@@ -12,15 +12,22 @@ import 'package:vjchoir_archives_api/vjchoir_archives_api.dart';
 /// {@endtemplate}
 class VjchoirArchivesRepository {
   /// {@macro vjchoir_archives_repository}
-  const VjchoirArchivesRepository(
+  VjchoirArchivesRepository(
     this._api,
   );
 
   final VjchoirArchivesApi _api;
 
+  Batches? _batches;
+  SymphonyOfVoices? _symphonyOfVoices;
+
   /// Returns info about vjchoir [Batches].
-  Future<Batches> getBatches() => _api.getBatches();
+  Future<Batches> getBatches() async {
+    return _batches ??= await _api.getBatches();
+  }
 
   /// Returns info about [SymphonyOfVoices].
-  Future<SymphonyOfVoices> getSymphonyOfVoices() => _api.getSymphonyOfVoices();
+  Future<SymphonyOfVoices> getSymphonyOfVoices() async {
+    return _symphonyOfVoices ??= await _api.getSymphonyOfVoices();
+  }
 }

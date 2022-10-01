@@ -22,6 +22,7 @@ dependencies:
   intl: ^0.17.0
   introduction_screen: ^3.0.2
   json_annotation: ^4.7.0
+  shared_preferences: ^2.0.15
   vjchoir_archives_api:
     path: packages/vjchoir_archives_api
   vjchoir_archives_repository:

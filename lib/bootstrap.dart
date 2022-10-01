@@ -11,7 +11,9 @@ import 'dart:developer';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:github_vjchoir_archives_api/github_vjchoir_archives_api.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:vjchoir_archives/app/providers.dart';
+import 'package:vjchoir_archives/storage/storage.dart';
 
 class AppProviderObserver extends ProviderObserver {
   @override
@@ -34,14 +36,18 @@ Future<void> bootstrap(FutureOr<Widget> Function() builder) async {
     log(details.exceptionAsString(), stackTrace: details.stack);
   };
 
+  WidgetsFlutterBinding.ensureInitialized();
+  final pref = await SharedPreferences.getInstance();
+
   await runZonedGuarded(
     () async => runApp(
       ProviderScope(
         observers: [AppProviderObserver()],
         overrides: [
-          vjchoirArchivesApiProvider.overrideWithValue(
-            GithubVjchoirArchivesApi(),
-          ),
+          vjchoirArchivesApiProvider
+              .overrideWithValue(GithubVjchoirArchivesApi()),
+          prefrencesRepositoryProvider
+              .overrideWithValue(PreferencesRepository(pref)),
         ],
         child: await builder(),
       ),

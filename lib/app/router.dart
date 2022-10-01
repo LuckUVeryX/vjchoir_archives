@@ -4,13 +4,17 @@ import 'package:go_router/go_router.dart';
 import 'package:vjchoir_archives/features/home/home.dart';
 import 'package:vjchoir_archives/features/landing/landing.dart';
 import 'package:vjchoir_archives/features/root/root.dart';
+import 'package:vjchoir_archives/storage/storage.dart';
 
 export 'package:go_router/go_router.dart';
 
 final routerProvider = Provider<GoRouter>((ref) {
   final router = RouterNotifier();
 
+  final kShowLanding = ref.watch(prefrencesRepositoryProvider).kShowLanding;
+
   return GoRouter(
+    initialLocation: kShowLanding ? Routes.landing : Routes.home,
     navigatorKey: _rootNavigatorKey,
     debugLogDiagnostics: true,
     refreshListenable: router,

@@ -1,17 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:introduction_screen/introduction_screen.dart';
 import 'package:vjchoir_archives/app/router.dart';
 import 'package:vjchoir_archives/l10n/l10n.dart';
+import 'package:vjchoir_archives/storage/storage.dart';
 import 'package:vjchoir_archives/utils/utils.dart';
 import 'package:vjchoir_archives/widgets/widgets.dart';
 
-class LandingPage extends StatelessWidget {
+class LandingPage extends ConsumerWidget {
   const LandingPage({super.key});
 
   PageDecoration get pageDecoration => const PageDecoration();
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final l10n = context.l10n;
     return Scaffold(
       appBar: const VjchoirAppBar(),
@@ -47,7 +49,10 @@ class LandingPage extends StatelessWidget {
         done: Text(l10n.landingDone),
         next: const Icon(Icons.arrow_forward_ios),
         skip: Text(l10n.landingSkip),
-        onDone: () => context.go(Routes.home),
+        onDone: () {
+          ref.read(prefrencesRepositoryProvider).kShowLanding = false;
+          context.go(Routes.home);
+        },
       ),
     );
   }

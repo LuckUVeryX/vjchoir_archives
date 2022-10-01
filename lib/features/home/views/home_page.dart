@@ -15,8 +15,12 @@ class HomePage extends ConsumerWidget {
     return [
       Text(l10n.homeWelcomeTitle, style: context.textTheme.titleMedium),
       const SizedBox(height: 8),
-      Assets.logos.vjchoir
-          .svg(fit: BoxFit.scaleDown, width: size.width * 3 / 4),
+      Assets.logos.vjchoir.svg(
+        fit: BoxFit.scaleDown,
+        width: size.width * 3 / 4,
+        placeholderBuilder: (context) =>
+            const AspectRatio(aspectRatio: 406 / 110.5),
+      ),
       const SizedBox(height: 12),
       Text(l10n.homeWelcomeBody),
       const Divider(),

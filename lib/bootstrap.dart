@@ -36,6 +36,7 @@ Future<void> bootstrap(FutureOr<Widget> Function() builder) async {
     log(details.exceptionAsString(), stackTrace: details.stack);
   };
 
+  WidgetsFlutterBinding.ensureInitialized();
   final pref = await SharedPreferences.getInstance();
 
   await runZonedGuarded(

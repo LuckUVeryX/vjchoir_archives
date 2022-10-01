@@ -6,7 +6,6 @@ import 'package:vjchoir_archives/gen/assets.gen.dart';
 import 'package:vjchoir_archives/l10n/l10n.dart';
 import 'package:vjchoir_archives/storage/storage.dart';
 import 'package:vjchoir_archives/utils/utils.dart';
-import 'package:vjchoir_archives/widgets/widgets.dart';
 
 class LandingPage extends ConsumerWidget {
   const LandingPage({super.key});
@@ -15,7 +14,6 @@ class LandingPage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = context.l10n;
     return Scaffold(
-      appBar: const VjchoirAppBar(),
       body: IntroductionScreen(
         pages: [
           PageViewModel(

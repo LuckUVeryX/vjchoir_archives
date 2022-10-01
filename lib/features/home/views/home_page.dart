@@ -35,36 +35,29 @@ class HomePage extends ConsumerWidget {
 
     final headers = buildHeaders(context);
 
-    return CustomScrollView(
+    return ListView.builder(
       cacheExtent: 9999, // Increase cache size to avoid rebuilding image.
-      slivers: [
-        const SliverAppBar(),
-        SliverList(
-          delegate: SliverChildBuilderDelegate(
-            childCount: headers.length +
-                featuredPhotos.maybeWhen<int>(
-                  orElse: () => 1,
-                  data: (data) => data.length,
-                ),
-            (context, index) {
-              if (index < headers.length) {
-                return Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 12),
-                  child: headers[index],
-                );
-              }
-              return featuredPhotos.when<Widget>(
-                loading: () =>
-                    const Center(child: CircularProgressIndicator.adaptive()),
-                error: (error, stackTrace) => Text(error.toString()),
-                data: (data) => CachedNetworkImage(
-                  imageUrl: data[index - headers.length],
-                ),
-              );
-            },
+      itemCount: headers.length +
+          featuredPhotos.maybeWhen<int>(
+            orElse: () => 1,
+            data: (data) => data.length,
           ),
-        ),
-      ],
+      itemBuilder: (context, index) {
+        if (index < headers.length) {
+          return Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 12),
+            child: headers[index],
+          );
+        }
+        return featuredPhotos.when<Widget>(
+          loading: () =>
+              const Center(child: CircularProgressIndicator.adaptive()),
+          error: (error, stackTrace) => Text(error.toString()),
+          data: (data) => CachedNetworkImage(
+            imageUrl: data[index - headers.length],
+          ),
+        );
+      },
     );
   }
 }

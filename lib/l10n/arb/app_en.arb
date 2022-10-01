@@ -8,10 +8,6 @@
     "@landingSkip": {
         "description": "Landing page done skip button"
     },
-    "landingTitleArchives": "Archives",
-    "@landingTitleArchives": {
-        "description": "Landing page Archives title"
-    },
     "landingTitleBatches": "Batches",
     "@landingTitleBatches": {
         "description": "Landing page Batches title"

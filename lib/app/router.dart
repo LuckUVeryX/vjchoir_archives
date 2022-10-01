@@ -1,7 +1,6 @@
 import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:vjchoir_archives/features/home/home.dart';
 import 'package:vjchoir_archives/features/landing/landing.dart';
 import 'package:vjchoir_archives/features/root/root.dart';
 import 'package:vjchoir_archives/storage/storage.dart';
@@ -14,7 +13,8 @@ final routerProvider = Provider<GoRouter>((ref) {
   final kShowLanding = ref.watch(prefrencesRepositoryProvider).kShowLanding;
 
   return GoRouter(
-    initialLocation: kShowLanding ? Routes.landing : Routes.home,
+    // TODO(Ryan): Save the most recent tab
+    initialLocation: kShowLanding ? Routes.landing : Routes.batches,
     navigatorKey: _rootNavigatorKey,
     debugLogDiagnostics: true,
     refreshListenable: router,
@@ -41,10 +41,6 @@ class RouterNotifier extends ChangeNotifier {
         builder: (context, state, child) => RootPage(child: child),
         routes: [
           GoRoute(
-            path: Routes.home,
-            builder: (context, state) => const HomePage(),
-          ),
-          GoRoute(
             path: Routes.batches,
             builder: (context, state) => const Center(child: Text('Batches')),
           ),
@@ -65,7 +61,6 @@ class RouterNotifier extends ChangeNotifier {
 
 abstract class Routes {
   static const landing = '/';
-  static const home = '/home';
   static const batches = '/batches';
   static const symphonyOfVoices = '/symphonyOfVoices';
 }

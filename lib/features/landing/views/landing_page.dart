@@ -50,7 +50,7 @@ class LandingPage extends ConsumerWidget {
         skip: Text(l10n.landingSkip),
         onDone: () {
           ref.read(prefrencesRepositoryProvider).kShowLanding = false;
-          context.go(Routes.home);
+          context.go(Routes.batches);
         },
       ),
     );

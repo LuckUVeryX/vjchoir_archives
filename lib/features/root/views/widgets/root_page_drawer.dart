@@ -31,20 +31,6 @@ class RootPageDrawer extends StatelessWidget {
           const SizedBox(height: 12),
           ListTile(
             leading: Icon(
-              Icons.home_rounded,
-              color: listTileIconColor,
-            ),
-            title: Text(
-              l10n.drawerHome,
-              style: listTileTextStyle,
-            ),
-            onTap: () {
-              context.go(Routes.home);
-              Navigator.of(context).pop();
-            },
-          ),
-          ListTile(
-            leading: Icon(
               Icons.group_rounded,
               color: listTileIconColor,
             ),

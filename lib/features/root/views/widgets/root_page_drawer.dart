@@ -1,16 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:vjchoir_archives/app/router.dart';
+import 'package:vjchoir_archives/features/root/controller/controller.dart';
 import 'package:vjchoir_archives/gen/assets.gen.dart';
 import 'package:vjchoir_archives/l10n/l10n.dart';
 import 'package:vjchoir_archives/utils/utils.dart';
 
-class RootPageDrawer extends StatelessWidget {
+class RootPageDrawer extends ConsumerWidget {
   const RootPageDrawer({
     super.key,
   });
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final listTileTextStyle = context.textTheme.titleMedium
         ?.copyWith(color: context.colorScheme.onPrimary);
     final listTileIconColor = context.colorScheme.onPrimary;
@@ -35,10 +37,12 @@ class RootPageDrawer extends StatelessWidget {
               color: listTileIconColor,
             ),
             title: Text(
-              l10n.drawerBatches,
+              l10n.rootBatches.toUpperCase(),
               style: listTileTextStyle,
             ),
             onTap: () {
+              ref.read(rootControllerProvider.notifier).state =
+                  RootPageTab.batches;
               context.go(Routes.batches);
               Navigator.of(context).pop();
             },
@@ -49,10 +53,12 @@ class RootPageDrawer extends StatelessWidget {
               color: listTileIconColor,
             ),
             title: Text(
-              l10n.drawerSymphonyOfVoices,
+              l10n.rootSymphonyOfVoices.toUpperCase(),
               style: listTileTextStyle,
             ),
             onTap: () {
+              ref.read(rootControllerProvider.notifier).state =
+                  RootPageTab.symphonyOfVoices;
               context.go(Routes.symphonyOfVoices);
               Navigator.of(context).pop();
             },

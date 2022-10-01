@@ -20,7 +20,7 @@ class LandingPage extends ConsumerWidget {
             decoration: const PageDecoration(
               bodyAlignment: Alignment.center,
             ),
-            body: l10n.landingBodyArchives,
+            body: l10n.landingBodyVjchoir,
             titleWidget: Assets.logos.vjchoir
                 .svg(width: context.mediaQuerySize.width * 3 / 4),
           ),

@@ -8,6 +8,10 @@
     "@landingSkip": {
         "description": "Landing page done skip button"
     },
+    "landingBodyVjchoir": "The unofficial official app for the Victoria Junior College Choir.",
+    "@landingBodyVjchoir": {
+        "description": "Landing page Vjchoir body"
+    },
     "landingTitleBatches": "Batches",
     "@landingTitleBatches": {
         "description": "Landing page Batches title"
@@ -15,10 +19,6 @@
     "landingTitleSymphonyOfVoices": "Symphony of Voices",
     "@landingTitleSymphonyOfVoices": {
         "description": "Landing page Symphony of Voices title"
-    },
-    "landingBodyArchives": "The unofficial official app for the Victoria Junior College Choir.",
-    "@landingBodyArchives": {
-        "description": "Landing page Archives body"
     },
     "landingBodyBatches": "Discovery the history of each Vjchoir batch past and present.",
     "@landingBodyBatches": {
@@ -28,28 +28,12 @@
     "@landingBodySymphonyOfVoices": {
         "description": "Landing page Symphony of Voices body"
     },
-    "drawerHome": "HOME",
-    "@drawerHome": {
-        "description": "Label for home list tile in drawer"
+    "rootBatches": "Batches",
+    "@rootBatches": {
+        "description": "Label for batches in root page."
     },
-    "drawerBatches": "BATCHES",
-    "@drawerBatches": {
-        "description": "Label for batches list tile in drawer"
-    },
-    "drawerSymphonyOfVoices": "SYMPHONY OF VOICES",
-    "@drawerSymphonyOfVoices": {
-        "description": "Label for Symphony of voices list tile in drawer"
-    },
-    "homeWelcomeTitle": "Welcome to the...",
-    "@homeWelcomeTitle": {
-        "description": "Home page title"
-    },
-    "homeWelcomeBody": "Welcome to the unofficial official webpage for the Victoria Junior College Choir. This website is a repository of batch information, songs, concerts and other cool stuff for you to peruse. Enjoy!",
-    "@homeWelcomeBody": {
-        "description": "Home page body"
-    },
-    "homeFeaturedPhotos": "Featured Photos",
-    "@homeFeaturedPhotos": {
-        "description": "Featured Photos header"
+    "rootSymphonyOfVoices": "Symphony of Voices",
+    "@rootSymphonyOfVoices": {
+        "description": "Label for Symphony of Voices in root page."
     }
 }

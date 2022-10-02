@@ -1,7 +1,7 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:vjchoir_archives/storage/preferences_repository.dart';
+import 'package:vjchoir_archives/features/storage/preferences_repository.dart';
 
 class MockSharedPreferences extends Mock implements SharedPreferences {}
 

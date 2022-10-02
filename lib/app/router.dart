@@ -4,7 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:vjchoir_archives/features/batches/batches.dart';
 import 'package:vjchoir_archives/features/landing/landing.dart';
 import 'package:vjchoir_archives/features/root/root.dart';
-import 'package:vjchoir_archives/storage/storage.dart';
+import 'package:vjchoir_archives/features/storage/storage.dart';
 
 export 'package:go_router/go_router.dart';
 

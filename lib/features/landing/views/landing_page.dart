@@ -4,7 +4,7 @@ import 'package:introduction_screen/introduction_screen.dart';
 import 'package:vjchoir_archives/app/router.dart';
 import 'package:vjchoir_archives/gen/assets.gen.dart';
 import 'package:vjchoir_archives/l10n/l10n.dart';
-import 'package:vjchoir_archives/storage/storage.dart';
+import 'package:vjchoir_archives/features/storage/storage.dart';
 import 'package:vjchoir_archives/utils/utils.dart';
 
 class LandingPage extends ConsumerWidget {

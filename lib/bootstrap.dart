@@ -13,7 +13,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:github_vjchoir_archives_api/github_vjchoir_archives_api.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:vjchoir_archives/app/providers.dart';
-import 'package:vjchoir_archives/storage/storage.dart';
+import 'package:vjchoir_archives/features/storage/storage.dart';
 
 class AppProviderObserver extends ProviderObserver {
   @override

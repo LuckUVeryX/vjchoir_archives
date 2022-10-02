@@ -35,5 +35,17 @@
     "rootSymphonyOfVoices": "Symphony of Voices",
     "@rootSymphonyOfVoices": {
         "description": "Label for Symphony of Voices in root page."
+    },
+    "batchTheChoir": "The Choir",
+    "@batchTheChoir": {
+        "description": "The choir label for the batches page."
+    },
+    "batchCommittees": "Committees",
+    "@batchCommittees": {
+        "description": "Committees label for the batches page."
+    },
+    "batchMembers": "Members",
+    "@batchMembers": {
+        "description": "Members label for the batches page."
     }
 }

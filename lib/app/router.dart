@@ -44,6 +44,14 @@ class RouterNotifier extends ChangeNotifier {
           GoRoute(
             path: Routes.batches,
             builder: (context, state) => const BatchesPage(),
+            routes: [
+              GoRoute(
+                path: Routes._batchId.param,
+                parentNavigatorKey: _rootNavigatorKey,
+                builder: (context, state) =>
+                    BatchSubpage(batchId: state.params[Routes._batchId]!),
+              ),
+            ],
           ),
           GoRoute(
             path: Routes.symphonyOfVoices,
@@ -63,5 +71,10 @@ class RouterNotifier extends ChangeNotifier {
 abstract class Routes {
   static const landing = '/';
   static const batches = '/batches';
+  static const _batchId = 'batchId';
   static const symphonyOfVoices = '/symphonyOfVoices';
+}
+
+extension _RouteParamsX on String {
+  String get param => ':${this}';
 }

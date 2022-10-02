@@ -84,7 +84,11 @@ class _BatchSubpageView extends StatelessWidget {
                     comm.name,
                     style: textTheme.bodyLarge,
                   ),
-                  CachedNetworkImage(imageUrl: comm.img),
+                  CachedNetworkImage(
+                    imageUrl: comm.img,
+                    placeholder: (_, __) =>
+                        const ShimmerPlaceholder(aspectRatio: 14 / 9),
+                  ),
                   Padding(
                     padding: const EdgeInsets.all(4),
                     child: Text(

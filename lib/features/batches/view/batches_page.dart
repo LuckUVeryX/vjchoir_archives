@@ -31,7 +31,11 @@ class BatchesPage extends ConsumerWidget {
                     onTap: () => context.go('${Routes.batches}/${batch.id}'),
                     child: Column(
                       children: [
-                        CachedNetworkImage(imageUrl: batch.image),
+                        CachedNetworkImage(
+                          imageUrl: batch.image,
+                          placeholder: (_, __) =>
+                              const ShimmerPlaceholder(aspectRatio: 5 / 3),
+                        ),
                         ListTile(
                           title: Text(batch.id),
                           subtitle: Text(batch.name),

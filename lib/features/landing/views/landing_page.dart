@@ -6,7 +6,6 @@ import 'package:vjchoir_archives/gen/assets.gen.dart';
 import 'package:vjchoir_archives/l10n/l10n.dart';
 import 'package:vjchoir_archives/storage/storage.dart';
 import 'package:vjchoir_archives/utils/utils.dart';
-import 'package:vjchoir_archives/widgets/widgets.dart';
 
 class LandingPage extends ConsumerWidget {
   const LandingPage({super.key});
@@ -15,14 +14,13 @@ class LandingPage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = context.l10n;
     return Scaffold(
-      appBar: const VjchoirAppBar(),
       body: IntroductionScreen(
         pages: [
           PageViewModel(
             decoration: const PageDecoration(
               bodyAlignment: Alignment.center,
             ),
-            body: l10n.landingBodyArchives,
+            body: l10n.landingBodyVjchoir,
             titleWidget: Assets.logos.vjchoir
                 .svg(width: context.mediaQuerySize.width * 3 / 4),
           ),
@@ -50,7 +48,7 @@ class LandingPage extends ConsumerWidget {
         skip: Text(l10n.landingSkip),
         onDone: () {
           ref.read(prefrencesRepositoryProvider).kShowLanding = false;
-          context.go(Routes.home);
+          context.go(Routes.batches);
         },
       ),
     );

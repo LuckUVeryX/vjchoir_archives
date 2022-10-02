@@ -57,7 +57,7 @@ class _SymphonyOfVoicesSubPageView extends StatelessWidget {
           ],
           title: _InvisibleExpandedHeader(
             child: Text(
-              sov.title,
+              sov.abbr,
               style: context.theme.appBarTheme.titleTextStyle,
             ),
           ),

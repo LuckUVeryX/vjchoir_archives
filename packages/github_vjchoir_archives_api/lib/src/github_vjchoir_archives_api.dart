@@ -103,9 +103,9 @@ class GithubVjchoirArchivesApi extends VjchoirArchivesApi {
     for (final sov in symphonyOfVoices.sov) {
       newSov.add(
         sov.copyWith(
-          artwork: p.normalize(
-            'https://$_baseUrl/$_assetPath/${sov.artwork.replaceFirst('../', '')}',
-          ),
+          artwork: 'https://${p.normalize(
+            '$_baseUrl/$_assetPath/${sov.artwork.replaceFirst('../', '')}',
+          )}',
         ),
       );
     }

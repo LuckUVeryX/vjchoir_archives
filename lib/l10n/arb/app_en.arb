@@ -47,5 +47,19 @@
     "batchMembers": "Members",
     "@batchMembers": {
         "description": "Members label for the batches page."
+    },
+    "sovRepertoire": "Repertoire",
+    "@sovRepertoire": {
+        "description": "Repertoire label for the sov page."
+    },
+    "sovRepertoireComposer": "by {composer}",
+    "@sovRepertoireComposer": {
+        "description": "Repertoire label for the sov page.",
+        "placeholders": {
+            "composer": {
+                "type": "String",
+                "example": "Ludwig van Beethoven"
+            }
+        }
     }
 }

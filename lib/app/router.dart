@@ -5,6 +5,8 @@ import 'package:vjchoir_archives/features/batches/batches.dart';
 import 'package:vjchoir_archives/features/landing/landing.dart';
 import 'package:vjchoir_archives/features/root/root.dart';
 import 'package:vjchoir_archives/features/storage/storage.dart';
+import 'package:vjchoir_archives/features/symphony_of_voices/symphony_of_voices.dart';
+import 'package:vjchoir_archives/features/symphony_of_voices/view/symphony_of_voices_subpage.dart';
 
 export 'package:go_router/go_router.dart';
 
@@ -55,8 +57,16 @@ class RouterNotifier extends ChangeNotifier {
           ),
           GoRoute(
             path: Routes.symphonyOfVoices,
-            builder: (context, state) =>
-                const Center(child: Text('SymphonyOfVoices')),
+            builder: (context, state) => const SymphonyOfVoicesPage(),
+            routes: [
+              GoRoute(
+                path: Routes._symphonyOfVoicesId.param,
+                parentNavigatorKey: _rootNavigatorKey,
+                builder: (context, state) => SymphonyOfVoicesSubpage(
+                  sovId: int.parse(state.params[Routes._symphonyOfVoicesId]!),
+                ),
+              ),
+            ],
           ),
         ],
       ),
@@ -72,7 +82,8 @@ abstract class Routes {
   static const landing = '/';
   static const batches = '/batches';
   static const _batchId = 'batchId';
-  static const symphonyOfVoices = '/symphonyOfVoices';
+  static const symphonyOfVoices = '/sov';
+  static const _symphonyOfVoicesId = 'sovId';
 }
 
 extension _RouteParamsX on String {

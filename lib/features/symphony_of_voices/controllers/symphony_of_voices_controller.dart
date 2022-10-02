@@ -3,7 +3,7 @@ import 'package:vjchoir_archives/app/providers.dart';
 import 'package:vjchoir_archives_repository/vjchoir_archives_repository.dart';
 
 export 'package:vjchoir_archives_repository/vjchoir_archives_repository.dart'
-    show SymphonyOfVoices;
+    show Sov;
 
 final symphonyOfVoicesControllerProvider = StateNotifierProvider<
     SymphonyOfVoicesController, AsyncValue<SymphonyOfVoices>>((ref) {

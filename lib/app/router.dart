@@ -5,6 +5,7 @@ import 'package:vjchoir_archives/features/batches/batches.dart';
 import 'package:vjchoir_archives/features/landing/landing.dart';
 import 'package:vjchoir_archives/features/root/root.dart';
 import 'package:vjchoir_archives/features/storage/storage.dart';
+import 'package:vjchoir_archives/features/symphony_of_voices/symphony_of_voices.dart';
 
 export 'package:go_router/go_router.dart';
 
@@ -55,8 +56,7 @@ class RouterNotifier extends ChangeNotifier {
           ),
           GoRoute(
             path: Routes.symphonyOfVoices,
-            builder: (context, state) =>
-                const Center(child: Text('SymphonyOfVoices')),
+            builder: (context, state) => const SymphonyOfVoicesPage(),
           ),
         ],
       ),

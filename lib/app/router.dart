@@ -1,6 +1,7 @@
 import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:vjchoir_archives/features/batches/batches.dart';
 import 'package:vjchoir_archives/features/landing/landing.dart';
 import 'package:vjchoir_archives/features/root/root.dart';
 import 'package:vjchoir_archives/storage/storage.dart';
@@ -42,7 +43,7 @@ class RouterNotifier extends ChangeNotifier {
         routes: [
           GoRoute(
             path: Routes.batches,
-            builder: (context, state) => const Center(child: Text('Batches')),
+            builder: (context, state) => const BatchesPage(),
           ),
           GoRoute(
             path: Routes.symphonyOfVoices,

@@ -32,7 +32,11 @@ class SymphonyOfVoicesPage extends ConsumerWidget {
                         context.go('${Routes.symphonyOfVoices}/${sov.id}'),
                     child: Column(
                       children: [
-                        CachedNetworkImage(imageUrl: sov.artwork),
+                        CachedNetworkImage(
+                          imageUrl: sov.artwork,
+                          placeholder: (_, __) =>
+                              const ShimmerPlaceholder(aspectRatio: 1),
+                        ),
                         ListTile(
                           title: Text(sov.abbr),
                           subtitle: Text(sov.title),

@@ -5,6 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:vjchoir_archives/features/symphony_of_voices/controllers/controllers.dart';
 import 'package:vjchoir_archives/l10n/l10n.dart';
 import 'package:vjchoir_archives/utils/utils.dart';
+import 'package:vjchoir_archives/widgets/widgets.dart';
 
 class SymphonyOfVoicesSubpage extends ConsumerWidget {
   const SymphonyOfVoicesSubpage({
@@ -68,6 +69,7 @@ class _SymphonyOfVoicesSubPageView extends StatelessWidget {
             background: CachedNetworkImage(
               imageUrl: sov.artwork,
               fit: BoxFit.cover,
+              placeholder: (_, __) => const ShimmerPlaceholder(aspectRatio: 1),
             ),
           ),
         ),

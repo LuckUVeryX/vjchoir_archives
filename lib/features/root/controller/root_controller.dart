@@ -1,19 +1,21 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:vjchoir_archives/l10n/l10n.dart';
+import 'package:vjchoir_archives/app/router.dart';
 
 final rootControllerProvider = StateProvider<RootPageTab>((ref) {
-  return RootPageTab.batches;
+  return RootPageTab.sov;
 });
 
-enum RootPageTab { batches, symphonyOfVoices }
+enum RootPageTab { batches, sov, listen }
 
 extension RootPageTabX on RootPageTab {
-  String appBarTitle(AppLocalizations l10n) {
+  String get path {
     switch (this) {
       case RootPageTab.batches:
-        return l10n.rootBatches;
-      case RootPageTab.symphonyOfVoices:
-        return l10n.rootSymphonyOfVoices;
+        return Routes.batches;
+      case RootPageTab.sov:
+        return Routes.sov;
+      case RootPageTab.listen:
+        return Routes.listen;
     }
   }
 }

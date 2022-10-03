@@ -56,7 +56,7 @@ class RouterNotifier extends ChangeNotifier {
             ],
           ),
           GoRoute(
-            path: Routes.symphonyOfVoices,
+            path: Routes.sov,
             builder: (context, state) => const SymphonyOfVoicesPage(),
             routes: [
               GoRoute(
@@ -67,6 +67,11 @@ class RouterNotifier extends ChangeNotifier {
                 ),
               ),
             ],
+          ),
+          GoRoute(
+            path: Routes.listen,
+            builder: (context, state) =>
+                const Center(child: Text(Routes.listen)),
           ),
         ],
       ),
@@ -82,8 +87,9 @@ abstract class Routes {
   static const landing = '/';
   static const batches = '/batches';
   static const _batchId = 'batchId';
-  static const symphonyOfVoices = '/sov';
+  static const sov = '/sov';
   static const _symphonyOfVoicesId = 'sovId';
+  static const listen = '/listen';
 }
 
 extension _RouteParamsX on String {

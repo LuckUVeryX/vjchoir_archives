@@ -32,9 +32,13 @@
     "@rootBatches": {
         "description": "Label for batches in root page."
     },
-    "rootSymphonyOfVoices": "Symphony of Voices",
-    "@rootSymphonyOfVoices": {
-        "description": "Label for Symphony of Voices in root page."
+    "rootSOV": "SOV",
+    "@rootSOV": {
+        "description": "Label for SOV in root page."
+    },
+    "rootListen": "Listen",
+    "@rootListen": {
+        "description": "Label for Listen in root page."
     },
     "batchTheChoir": "The Choir",
     "@batchTheChoir": {

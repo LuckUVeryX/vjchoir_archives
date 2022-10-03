@@ -32,6 +32,7 @@ class App extends ConsumerWidget {
         useMaterial3: true,
         colorScheme: ColorScheme.fromSeed(
           seedColor: const Color(0xFF801B42),
+          brightness: Brightness.dark,
         ),
       ),
     );

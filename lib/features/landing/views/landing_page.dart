@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:introduction_screen/introduction_screen.dart';
-import 'package:vjchoir_archives/app/router.dart';
-import 'package:vjchoir_archives/features/storage/storage.dart';
+import 'package:vjchoir_archives/features/landing/landing.dart';
 import 'package:vjchoir_archives/gen/assets.gen.dart';
 import 'package:vjchoir_archives/l10n/l10n.dart';
 import 'package:vjchoir_archives/utils/utils.dart';
@@ -46,10 +45,9 @@ class LandingPage extends ConsumerWidget {
         done: Text(l10n.landingDone),
         next: const Icon(Icons.arrow_forward_ios),
         skip: Text(l10n.landingSkip),
-        onDone: () {
-          ref.read(prefrencesRepositoryProvider).kShowLanding = false;
-          context.go(Routes.batches);
-        },
+        onDone: () => ref
+            .read(landingControllerProvider.notifier)
+            .setShowLandingValue(value: false),
       ),
     );
   }

@@ -1,2 +1,2 @@
-export 'views/landing_page.dart';
+export 'controller/controller.dart';
 export 'views/views.dart';

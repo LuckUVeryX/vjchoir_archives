@@ -4,20 +4,16 @@ import 'package:go_router/go_router.dart';
 import 'package:vjchoir_archives/features/batches/batches.dart';
 import 'package:vjchoir_archives/features/landing/landing.dart';
 import 'package:vjchoir_archives/features/root/root.dart';
-import 'package:vjchoir_archives/features/storage/storage.dart';
 import 'package:vjchoir_archives/features/symphony_of_voices/symphony_of_voices.dart';
 import 'package:vjchoir_archives/features/symphony_of_voices/view/symphony_of_voices_subpage.dart';
 
 export 'package:go_router/go_router.dart';
 
 final routerProvider = Provider<GoRouter>((ref) {
-  final router = RouterNotifier();
-
-  final kShowLanding = ref.watch(prefrencesRepositoryProvider).kShowLanding;
+  final router = RouterNotifier(ref);
 
   return GoRouter(
-    // TODO(Ryan): Save the most recent tab
-    initialLocation: kShowLanding ? Routes.landing : Routes.batches,
+    initialLocation: Routes.sov,
     navigatorKey: _rootNavigatorKey,
     debugLogDiagnostics: true,
     refreshListenable: router,
@@ -33,6 +29,12 @@ final GlobalKey<NavigatorState> _rootNavigatorKey =
     GlobalKey<NavigatorState>(debugLabel: 'root');
 
 class RouterNotifier extends ChangeNotifier {
+  RouterNotifier(this._ref) {
+    _ref.listen(landingControllerProvider, (_, __) => notifyListeners());
+  }
+
+  final Ref _ref;
+
   List<RouteBase> get _routes {
     return [
       GoRoute(
@@ -79,6 +81,11 @@ class RouterNotifier extends ChangeNotifier {
   }
 
   String? _redirectLogic(BuildContext context, GoRouterState state) {
+    final showLanding = _ref.read(landingControllerProvider);
+
+    if (!showLanding && state.subloc == Routes.landing) return Routes.sov;
+    if (showLanding && state.subloc != Routes.landing) return Routes.landing;
+
     return null;
   }
 }

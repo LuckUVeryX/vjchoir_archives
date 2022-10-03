@@ -46,7 +46,7 @@ Future<void> bootstrap(FutureOr<Widget> Function() builder) async {
         overrides: [
           vjchoirArchivesApiProvider
               .overrideWithValue(GithubVjchoirArchivesApi()),
-          prefrencesRepositoryProvider
+          preferencesRepositoryProvider
               .overrideWithValue(PreferencesRepository(pref)),
         ],
         child: await builder(),

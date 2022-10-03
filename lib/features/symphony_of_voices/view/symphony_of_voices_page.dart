@@ -28,8 +28,7 @@ class SymphonyOfVoicesPage extends ConsumerWidget {
               child: Stack(
                 children: [
                   InkWell(
-                    onTap: () =>
-                        context.go('${Routes.symphonyOfVoices}/${sov.id}'),
+                    onTap: () => context.go('${Routes.sov}/${sov.id}'),
                     child: Column(
                       children: [
                         CachedNetworkImage(

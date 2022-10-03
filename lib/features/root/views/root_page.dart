@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:vjchoir_archives/app/router.dart';
 import 'package:vjchoir_archives/features/root/controller/controller.dart';
-import 'package:vjchoir_archives/features/root/views/widgets/widgets.dart';
 import 'package:vjchoir_archives/l10n/l10n.dart';
 
 class RootPage extends ConsumerWidget {
@@ -16,11 +17,29 @@ class RootPage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = context.l10n;
     return Scaffold(
-      appBar: AppBar(
-        title: Text(ref.watch(rootControllerProvider).appBarTitle(l10n)),
-      ),
       body: child,
-      drawer: const RootPageDrawer(),
+      bottomNavigationBar: NavigationBar(
+        selectedIndex: ref.watch(rootControllerProvider).index,
+        onDestinationSelected: (index) {
+          final tab = RootPageTab.values[index];
+          ref.read(rootControllerProvider.notifier).state = tab;
+          context.go(tab.path);
+        },
+        destinations: [
+          NavigationDestination(
+            icon: const Icon(FontAwesomeIcons.peopleGroup),
+            label: l10n.rootBatches,
+          ),
+          NavigationDestination(
+            icon: const Icon(FontAwesomeIcons.recordVinyl),
+            label: l10n.rootSOV,
+          ),
+          NavigationDestination(
+            icon: const Icon(FontAwesomeIcons.headphones),
+            label: l10n.rootListen,
+          ),
+        ],
+      ),
     );
   }
 }

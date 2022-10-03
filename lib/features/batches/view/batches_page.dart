@@ -1,10 +1,11 @@
+import 'dart:math' as math;
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:vjchoir_archives/app/router.dart';
 import 'package:vjchoir_archives/features/batches/controllers/controllers.dart';
-import 'package:vjchoir_archives/widgets/widgets.dart';
+import 'package:vjchoir_archives/utils/utils.dart';
 
 class BatchesPage extends ConsumerWidget {
   const BatchesPage({super.key});
@@ -19,32 +20,58 @@ class BatchesPage extends ConsumerWidget {
         child: CircularProgressIndicator.adaptive(),
       ),
       data: (data) {
-        return MasonryGridView.count(
-          crossAxisCount: 2,
+        final cardColors = [
+          context.colorScheme.primary,
+          context.colorScheme.secondary,
+          context.colorScheme.tertiary,
+          context.colorScheme.primaryContainer,
+          context.colorScheme.secondaryContainer,
+          context.colorScheme.tertiaryContainer,
+        ];
+
+        return GridView.builder(
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 2,
+            childAspectRatio: 1.5,
+          ),
           itemCount: data.batches.length,
           itemBuilder: (context, index) {
             final batch = data.batches[index];
-            return FilledCard(
-              child: Stack(
-                children: [
-                  InkWell(
-                    onTap: () => context.go('${Routes.batches}/${batch.id}'),
-                    child: Column(
-                      children: [
-                        CachedNetworkImage(
-                          imageUrl: batch.image,
-                          placeholder: (_, __) =>
-                              const ShimmerPlaceholder(aspectRatio: 5 / 3),
+            return Card(
+              clipBehavior: Clip.antiAlias,
+              color: cardColors[index % cardColors.length],
+              child: InkWell(
+                onTap: () => context.go('${Routes.batches}/${batch.id}'),
+                child: Stack(
+                  children: [
+                    Align(
+                      alignment: Alignment.bottomRight,
+                      child: AbsorbPointer(
+                        child: Transform(
+                          transform: Matrix4.identity()
+                            ..rotateZ(math.pi / 6)
+                            ..translate(24 / 1, -16 / 1),
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(12),
+                            child: CachedNetworkImage(
+                              imageUrl: batch.image,
+                              fit: BoxFit.cover,
+                              height: context.mediaQuerySize.width / 5,
+                              width: context.mediaQuerySize.width / 5,
+                            ),
+                          ),
                         ),
-                        ListTile(
-                          title: Text(batch.id),
-                          subtitle: Text(batch.name),
-                          dense: true,
-                        ),
-                      ],
+                      ),
                     ),
-                  ),
-                ],
+                    ListTile(
+                      title: Text(
+                        batch.name,
+                        style: context.textTheme.titleLarge
+                            ?.copyWith(fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                  ],
+                ),
               ),
             );
           },

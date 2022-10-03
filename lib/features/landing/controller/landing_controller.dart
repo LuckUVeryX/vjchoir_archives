@@ -14,8 +14,8 @@ class LandingController extends StateNotifier<bool> {
 
   final PreferencesRepository _prefRepo;
 
-  void setShowLandingValue({required bool value}) {
-    _prefRepo.kShowLanding = value;
-    state = value;
+  void landingIntroComplete() {
+    _prefRepo.kShowLanding = false;
+    state = false;
   }
 }

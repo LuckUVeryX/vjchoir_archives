@@ -45,9 +45,8 @@ class LandingPage extends ConsumerWidget {
         done: Text(l10n.landingDone),
         next: const Icon(Icons.arrow_forward_ios),
         skip: Text(l10n.landingSkip),
-        onDone: () => ref
-            .read(landingControllerProvider.notifier)
-            .setShowLandingValue(value: false),
+        onDone: () =>
+            ref.read(landingControllerProvider.notifier).landingIntroComplete(),
       ),
     );
   }

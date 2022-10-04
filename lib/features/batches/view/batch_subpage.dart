@@ -2,8 +2,8 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+import 'package:vjchoir_archives/app/router.dart';
 import 'package:vjchoir_archives/features/batches/controllers/controllers.dart';
-import 'package:vjchoir_archives/features/batches/view/widgets/widgets.dart';
 import 'package:vjchoir_archives/l10n/l10n.dart';
 import 'package:vjchoir_archives/utils/utils.dart';
 import 'package:vjchoir_archives/widgets/widgets.dart';
@@ -84,16 +84,8 @@ class _BatchSubpageView extends StatelessWidget {
                   ),
                   listTile: ListTile(title: Text(comm.name)),
                 ),
-                onTap: () => Navigator.of(context).push(
-                  MaterialPageRoute<dynamic>(
-                    builder: (_) => FullscreenImageWithCaption(
-                      heroTag: comm.name,
-                      imageUrl: comm.img,
-                      title: comm.name,
-                      caption: comm.members.join(', '),
-                    ),
-                  ),
-                ),
+                onTap: () =>
+                    context.go('${Routes.batches}/${batch.id}/${comm.name}'),
               );
             }),
           ),

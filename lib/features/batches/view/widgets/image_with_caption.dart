@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class ImageWithCaption extends StatelessWidget {
-  const ImageWithCaption({
+class ImageWithTitle extends StatelessWidget {
+  const ImageWithTitle({
     super.key,
     required this.image,
     required this.listTile,

@@ -66,7 +66,7 @@ class _BatchSubpageView extends StatelessWidget {
               clipBehavior: Clip.antiAlias,
               child: Stack(
                 children: [
-                  ImageWithCaption(
+                  ImageWithTitle(
                     image: Hero(
                       tag: comm.name,
                       child: CachedNetworkImage(

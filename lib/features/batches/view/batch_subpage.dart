@@ -6,6 +6,7 @@ import 'package:vjchoir_archives/features/batches/controllers/controllers.dart';
 import 'package:vjchoir_archives/features/batches/view/widgets/widgets.dart';
 import 'package:vjchoir_archives/l10n/l10n.dart';
 import 'package:vjchoir_archives/utils/utils.dart';
+import 'package:vjchoir_archives/widgets/widgets.dart';
 
 class BatchSubpage extends ConsumerWidget {
   const BatchSubpage({
@@ -51,52 +52,50 @@ class _BatchSubpageView extends StatelessWidget {
           sliver: SliverList(
             delegate: SliverChildListDelegate.fixed([
               Text(l10n.batchTheChoir, style: textTheme.headlineLarge),
+              Card(
+                clipBehavior: Clip.antiAlias,
+                margin: EdgeInsets.zero,
+                child: CachedNetworkImage(imageUrl: batch.image),
+              ),
               Text(l10n.batchCommittees, style: textTheme.headlineSmall),
             ]),
           ),
         ),
-        SliverGrid(
-          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 2,
+        SliverPadding(
+          padding: const EdgeInsets.symmetric(horizontal: 8),
+          sliver: SliverGrid(
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 2,
+            ),
+            delegate: SliverChildBuilderDelegate(childCount: batch.comms.length,
+                (context, index) {
+              final comm = batch.comms[index];
+              return ImageCard(
+                image: ImageWithTitle(
+                  image: Hero(
+                    tag: comm.name,
+                    child: CachedNetworkImage(
+                      imageUrl: comm.img,
+                      fit: BoxFit.cover,
+                      placeholder: (_, __) =>
+                          const ShimmerPlaceholder(aspectRatio: 1),
+                    ),
+                  ),
+                  listTile: ListTile(title: Text(comm.name)),
+                ),
+                onTap: () => Navigator.of(context).push(
+                  MaterialPageRoute<dynamic>(
+                    builder: (_) => FullscreenImageWithCaption(
+                      heroTag: comm.name,
+                      imageUrl: comm.img,
+                      title: comm.name,
+                      caption: comm.members.join(', '),
+                    ),
+                  ),
+                ),
+              );
+            }),
           ),
-          delegate: SliverChildBuilderDelegate(childCount: batch.comms.length,
-              (context, index) {
-            final comm = batch.comms[index];
-            return Card(
-              clipBehavior: Clip.antiAlias,
-              child: Stack(
-                children: [
-                  ImageWithTitle(
-                    image: Hero(
-                      tag: comm.name,
-                      child: CachedNetworkImage(
-                        imageUrl: comm.img,
-                        fit: BoxFit.cover,
-                      ),
-                    ),
-                    listTile: ListTile(title: Text(comm.name)),
-                  ),
-                  Material(
-                    color: Colors.transparent,
-                    child: InkWell(
-                      onTap: () {
-                        Navigator.of(context).push(
-                          MaterialPageRoute<dynamic>(
-                            builder: (_) => FullscreenImageWithCaption(
-                              heroTag: comm.name,
-                              imageUrl: comm.img,
-                              title: comm.name,
-                              caption: comm.members.join(', '),
-                            ),
-                          ),
-                        );
-                      },
-                    ),
-                  ),
-                ],
-              ),
-            );
-          }),
         )
       ],
     );

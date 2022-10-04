@@ -29,7 +29,6 @@ class FullscreenImageWithCaption extends StatelessWidget {
               tag: heroTag,
               child: CachedNetworkImage(
                 imageUrl: imageUrl,
-                fit: BoxFit.contain,
               ),
             ),
             Padding(

@@ -1,12 +1,10 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
-import 'dart:async';
-
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
-import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:vjchoir_archives/features/batches/controllers/controllers.dart';
+import 'package:vjchoir_archives/features/batches/view/widgets/widgets.dart';
 import 'package:vjchoir_archives/l10n/l10n.dart';
 import 'package:vjchoir_archives/utils/utils.dart';
 import 'package:vjchoir_archives/widgets/widgets.dart';
@@ -24,9 +22,7 @@ class BatchSubpage extends ConsumerWidget {
     final batches = ref.watch(batchesControllerProvider);
 
     return Scaffold(
-      body: batches.when(
-        error: (error, stackTrace) => Center(child: Text(error.toString())),
-        loading: CircularProgressIndicator.adaptive,
+      body: batches.buildWhen(
         data: (data) {
           return _BatchSubpageView(
             batch: data.batches.firstWhere((e) => e.id == batchId),
@@ -44,223 +40,130 @@ class _BatchSubpageView extends StatelessWidget {
 
   final Batch batch;
 
-  static const sliverPadding = EdgeInsets.symmetric(horizontal: 12);
-
   @override
   Widget build(BuildContext context) {
-    final textTheme = context.textTheme;
     final l10n = context.l10n;
+    final textTheme = context.textTheme;
 
     return CustomScrollView(
       slivers: [
-        SliverAppBar(
-          title: Text(batch.name),
-          floating: true,
-        ),
+        SliverAppBar(floating: true, title: Text(batch.name)),
         SliverPadding(
-          padding: sliverPadding,
-          sliver: SliverToBoxAdapter(
-            child: Text(l10n.batchTheChoir, style: textTheme.titleLarge),
+          padding: const EdgeInsets.symmetric(horizontal: 12),
+          sliver: SliverList(
+            delegate: SliverChildListDelegate.fixed([
+              Text(l10n.batchTheChoir, style: textTheme.headlineSmall),
+              Card(
+                clipBehavior: Clip.antiAlias,
+                margin: EdgeInsets.zero,
+                child: CachedNetworkImage(imageUrl: batch.image),
+              ),
+              const SizedBox(height: 12),
+              Text(l10n.batchCommittees, style: textTheme.headlineSmall),
+            ]),
           ),
         ),
         SliverPadding(
-          padding: sliverPadding,
-          sliver: SliverToBoxAdapter(
-            child: Text(
-              l10n.batchCommittees,
-              style: textTheme.titleMedium,
-              textAlign: TextAlign.center,
+          padding: const EdgeInsets.symmetric(horizontal: 8),
+          sliver: SliverGrid(
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 2,
             ),
+            delegate: SliverChildBuilderDelegate(childCount: batch.comms.length,
+                (context, index) {
+              final comm = batch.comms[index];
+              return ImageCard(
+                image: ImageWithTitle(
+                  image: Hero(
+                    tag: comm.name,
+                    child: CachedNetworkImage(
+                      imageUrl: comm.img,
+                      fit: BoxFit.cover,
+                      placeholder: (_, __) =>
+                          const ShimmerPlaceholder(aspectRatio: 1),
+                    ),
+                  ),
+                  listTile: ListTile(title: Text(comm.name)),
+                ),
+                onTap: () => Navigator.of(context).push(
+                  MaterialPageRoute<dynamic>(
+                    builder: (_) => FullscreenImageWithCaption(
+                      heroTag: comm.name,
+                      imageUrl: comm.img,
+                      title: comm.name,
+                      caption: comm.members.join(', '),
+                    ),
+                  ),
+                ),
+              );
+            }),
           ),
         ),
-        SliverList(
-          delegate: SliverChildBuilderDelegate(
-            childCount: batch.comms.length,
-            (context, index) {
-              final comm = batch.comms[index];
-              return Column(
-                children: [
-                  Text(
-                    comm.name,
-                    style: textTheme.bodyLarge,
-                  ),
-                  CachedNetworkImage(
-                    imageUrl: comm.img,
-                    placeholder: (_, __) =>
-                        const ShimmerPlaceholder(aspectRatio: 14 / 9),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(4),
-                    child: Text(
-                      comm.members.join(', '),
-                      style: textTheme.labelSmall,
+        SliverPadding(
+          padding: const EdgeInsets.fromLTRB(12, 12, 12, 0),
+          sliver: SliverToBoxAdapter(
+            child: Text(l10n.batchMembers, style: textTheme.headlineSmall),
+          ),
+        ),
+        SliverPadding(
+          padding: const EdgeInsets.fromLTRB(8, 0, 8, 40),
+          sliver: SliverMasonryGrid(
+            delegate: SliverChildBuilderDelegate(
+                childCount: batch.sections.length, (context, index) {
+              final section = batch.sections[index];
+              return Card(
+                child: Column(
+                  children: [
+                    const SizedBox(height: 8),
+                    Text(
+                      section.name,
+                      style: textTheme.titleMedium,
                       textAlign: TextAlign.center,
                     ),
-                  ),
-                ],
-              );
-            },
-          ),
-        ),
-        SliverPadding(
-          padding: sliverPadding,
-          sliver: SliverToBoxAdapter(
-            child: Text(
-              l10n.batchMembers,
-              style: textTheme.titleMedium,
-              textAlign: TextAlign.center,
-            ),
-          ),
-        ),
-        SliverMasonryGrid.count(
-          crossAxisCount: 2,
-          itemBuilder: (context, index) {
-            final section = batch.sections[index];
-            return FilledCard(
-              child: Padding(
-                padding: const EdgeInsets.all(8),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Center(
-                      child: Text(
-                        section.name,
-                        style: textTheme.titleMedium,
-                        textAlign: TextAlign.center,
-                      ),
-                    ),
-                    const SizedBox(height: 4),
                     for (var i = 0; i < section.members.length; i++) ...[
-                      if (i == 0) ...[
-                        Row(
-                          children: [
-                            Flexible(
-                              child: FittedBox(
-                                fit: BoxFit.scaleDown,
-                                child: Text(
-                                  section.members[i],
-                                  style: textTheme.labelLarge,
-                                ),
-                              ),
-                            ),
-                            const SizedBox(width: 4),
-                            Container(
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 4),
-                              decoration: ShapeDecoration(
-                                shape: const StadiumBorder(),
-                                color: context.colorScheme.primary,
-                              ),
-                              child: Center(
-                                child: Text(
-                                  'SL',
-                                  style: textTheme.labelSmall?.copyWith(
-                                    color: context.colorScheme.onPrimary,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                  textAlign: TextAlign.center,
-                                ),
-                              ),
-                            ),
-                          ],
+                      ListTile(
+                        visualDensity: VisualDensity.compact,
+                        dense: true,
+                        title: Text(
+                          section.members[i],
+                          style: textTheme.labelSmall,
                         ),
-                      ] else ...[
-                        FittedBox(
-                          fit: BoxFit.scaleDown,
-                          child: Text(
-                            section.members[i],
-                            style: textTheme.labelLarge,
-                          ),
-                        ),
-                      ],
-                    ]
+                        trailing: i == 0 ? const _SlLabel() : null,
+                      ),
+                    ],
                   ],
                 ),
-              ),
-            );
-          },
-          childCount: batch.sections.length,
-        ),
-        if (batch.photos != null)
-          SliverToBoxAdapter(
-            child: _PhotoCarousel(photos: batch.photos!),
-          )
+              );
+            }),
+            gridDelegate: const SliverSimpleGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 2,
+            ),
+          ),
+        )
       ],
     );
   }
 }
 
-class _PhotoCarousel extends StatefulWidget {
-  const _PhotoCarousel({
-    required this.photos,
-  });
-
-  final List<String> photos;
-
-  @override
-  State<_PhotoCarousel> createState() => _PhotoCarouselState();
-}
-
-class _PhotoCarouselState extends State<_PhotoCarousel> {
-  int page = 999;
-
-  final controller = PageController(initialPage: 999);
-  Timer? timer;
-
-  @override
-  void initState() {
-    super.initState();
-    _resetPageScroll();
-  }
-
-  void _resetPageScroll() {
-    timer?.cancel();
-    timer = Timer.periodic(const Duration(seconds: 5), (timer) {
-      page++;
-      controller.animateToPage(
-        page,
-        duration: const Duration(milliseconds: 500),
-        curve: Curves.easeInOut,
-      );
-    });
-  }
-
-  @override
-  void dispose() {
-    timer?.cancel();
-    controller.dispose();
-    super.dispose();
-  }
+class _SlLabel extends StatelessWidget {
+  const _SlLabel();
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: context.mediaQuerySize.width * 3 / 4,
-      width: context.mediaQuerySize.width,
-      child: Stack(
-        alignment: const Alignment(0, 0.9),
-        children: [
-          PageView.builder(
-            controller: controller,
-            itemBuilder: (context, index) => CachedNetworkImage(
-              imageUrl: widget.photos[index % widget.photos.length],
-              fit: BoxFit.cover,
-            ),
-            onPageChanged: (value) {
-              page = value;
-              _resetPageScroll();
-            },
-          ),
-          SmoothPageIndicator(
-            controller: controller,
-            count: widget.photos.length,
-            effect: WormEffect(
-              activeDotColor: context.colorScheme.primary,
-              dotHeight: 12,
-              dotWidth: 12,
-            ),
-          ),
-        ],
+    return Container(
+      padding: const EdgeInsets.symmetric(
+        horizontal: 4,
+        vertical: 2,
+      ),
+      decoration: ShapeDecoration(
+        shape: const StadiumBorder(),
+        color: context.colorScheme.primary,
+      ),
+      child: Text(
+        'SL',
+        style: context.textTheme.labelSmall?.copyWith(
+          color: context.colorScheme.onPrimary,
+        ),
       ),
     );
   }

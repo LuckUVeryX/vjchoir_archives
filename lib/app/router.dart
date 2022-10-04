@@ -1,4 +1,4 @@
-import 'package:flutter/widgets.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:vjchoir_archives/features/batches/batches.dart';
@@ -51,9 +51,15 @@ class RouterNotifier extends ChangeNotifier {
             routes: [
               GoRoute(
                 path: Routes._batchId.param,
-                parentNavigatorKey: _rootNavigatorKey,
                 builder: (context, state) =>
                     BatchSubpage(batchId: state.params[Routes._batchId]!),
+                routes: [
+                  GoRoute(
+                    path: Routes._batchComm.param,
+                    parentNavigatorKey: _rootNavigatorKey,
+                    builder: (context, state) => const Scaffold(),
+                  )
+                ],
               ),
             ],
           ),
@@ -94,6 +100,7 @@ abstract class Routes {
   static const landing = '/';
   static const batches = '/batches';
   static const _batchId = 'batchId';
+  static const _batchComm = 'comm';
   static const sov = '/sov';
   static const _symphonyOfVoicesId = 'sovId';
   static const listen = '/listen';

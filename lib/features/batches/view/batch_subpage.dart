@@ -1,15 +1,12 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
-import 'dart:async';
-
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
-import 'package:smooth_page_indicator/smooth_page_indicator.dart';
+import 'package:vjchoir_archives/app/router.dart';
 import 'package:vjchoir_archives/features/batches/controllers/controllers.dart';
+import 'package:vjchoir_archives/features/batches/view/widgets/widgets.dart';
 import 'package:vjchoir_archives/l10n/l10n.dart';
 import 'package:vjchoir_archives/utils/utils.dart';
-import 'package:vjchoir_archives/widgets/widgets.dart';
 
 class BatchSubpage extends ConsumerWidget {
   const BatchSubpage({
@@ -44,224 +41,284 @@ class _BatchSubpageView extends StatelessWidget {
 
   final Batch batch;
 
-  static const sliverPadding = EdgeInsets.symmetric(horizontal: 12);
-
   @override
   Widget build(BuildContext context) {
-    final textTheme = context.textTheme;
     final l10n = context.l10n;
+    final textTheme = context.textTheme;
 
     return CustomScrollView(
       slivers: [
-        SliverAppBar(
-          title: Text(batch.name),
-          floating: true,
-        ),
+        const SliverAppBar(floating: true),
         SliverPadding(
-          padding: sliverPadding,
-          sliver: SliverToBoxAdapter(
-            child: Text(l10n.batchTheChoir, style: textTheme.titleLarge),
+          padding: const EdgeInsets.symmetric(horizontal: 12),
+          sliver: SliverList(
+            delegate: SliverChildListDelegate.fixed([
+              Text(l10n.batchTheChoir, style: textTheme.headlineLarge),
+              Text(l10n.batchCommittees, style: textTheme.headlineSmall),
+            ]),
           ),
         ),
-        SliverPadding(
-          padding: sliverPadding,
-          sliver: SliverToBoxAdapter(
-            child: Text(
-              l10n.batchCommittees,
-              style: textTheme.titleMedium,
-              textAlign: TextAlign.center,
-            ),
+        SliverGrid(
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 2,
           ),
-        ),
-        SliverList(
-          delegate: SliverChildBuilderDelegate(
-            childCount: batch.comms.length,
-            (context, index) {
-              final comm = batch.comms[index];
-              return Column(
+          delegate: SliverChildBuilderDelegate(childCount: batch.comms.length,
+              (context, index) {
+            final comm = batch.comms[index];
+            return Card(
+              clipBehavior: Clip.antiAlias,
+              child: Stack(
                 children: [
-                  Text(
-                    comm.name,
-                    style: textTheme.bodyLarge,
+                  ImageWithCaption(
+                    image: CachedNetworkImage(
+                      imageUrl: comm.img,
+                      fit: BoxFit.cover,
+                    ),
+                    listTile: ListTile(title: Text(comm.name)),
                   ),
-                  CachedNetworkImage(
-                    imageUrl: comm.img,
-                    placeholder: (_, __) =>
-                        const ShimmerPlaceholder(aspectRatio: 14 / 9),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(4),
-                    child: Text(
-                      comm.members.join(', '),
-                      style: textTheme.labelSmall,
-                      textAlign: TextAlign.center,
+                  Material(
+                    color: Colors.transparent,
+                    child: InkWell(
+                      onTap: () => context
+                          .go('${Routes.batches}/${batch.id}/${comm.name}'),
                     ),
                   ),
                 ],
-              );
-            },
-          ),
-        ),
-        SliverPadding(
-          padding: sliverPadding,
-          sliver: SliverToBoxAdapter(
-            child: Text(
-              l10n.batchMembers,
-              style: textTheme.titleMedium,
-              textAlign: TextAlign.center,
-            ),
-          ),
-        ),
-        SliverMasonryGrid.count(
-          crossAxisCount: 2,
-          itemBuilder: (context, index) {
-            final section = batch.sections[index];
-            return FilledCard(
-              child: Padding(
-                padding: const EdgeInsets.all(8),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Center(
-                      child: Text(
-                        section.name,
-                        style: textTheme.titleMedium,
-                        textAlign: TextAlign.center,
-                      ),
-                    ),
-                    const SizedBox(height: 4),
-                    for (var i = 0; i < section.members.length; i++) ...[
-                      if (i == 0) ...[
-                        Row(
-                          children: [
-                            Flexible(
-                              child: FittedBox(
-                                fit: BoxFit.scaleDown,
-                                child: Text(
-                                  section.members[i],
-                                  style: textTheme.labelLarge,
-                                ),
-                              ),
-                            ),
-                            const SizedBox(width: 4),
-                            Container(
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 4),
-                              decoration: ShapeDecoration(
-                                shape: const StadiumBorder(),
-                                color: context.colorScheme.primary,
-                              ),
-                              child: Center(
-                                child: Text(
-                                  'SL',
-                                  style: textTheme.labelSmall?.copyWith(
-                                    color: context.colorScheme.onPrimary,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                  textAlign: TextAlign.center,
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ] else ...[
-                        FittedBox(
-                          fit: BoxFit.scaleDown,
-                          child: Text(
-                            section.members[i],
-                            style: textTheme.labelLarge,
-                          ),
-                        ),
-                      ],
-                    ]
-                  ],
-                ),
               ),
             );
-          },
-          childCount: batch.sections.length,
-        ),
-        if (batch.photos != null)
-          SliverToBoxAdapter(
-            child: _PhotoCarousel(photos: batch.photos!),
-          )
+          }),
+        )
       ],
     );
   }
 }
 
-class _PhotoCarousel extends StatefulWidget {
-  const _PhotoCarousel({
-    required this.photos,
-  });
 
-  final List<String> photos;
+// class _BatchSubpageView extends StatelessWidget {
+//   const _BatchSubpageView({
+//     required this.batch,
+//   });
 
-  @override
-  State<_PhotoCarousel> createState() => _PhotoCarouselState();
-}
+//   final Batch batch;
 
-class _PhotoCarouselState extends State<_PhotoCarousel> {
-  int page = 999;
+//   static const sliverPadding = EdgeInsets.symmetric(horizontal: 12);
 
-  final controller = PageController(initialPage: 999);
-  Timer? timer;
+//   @override
+//   Widget build(BuildContext context) {
+//     final textTheme = context.textTheme;
+//     final l10n = context.l10n;
 
-  @override
-  void initState() {
-    super.initState();
-    _resetPageScroll();
-  }
+//     return CustomScrollView(
+//       slivers: [
+//         SliverAppBar(
+//           title: Text(batch.name),
+//           floating: true,
+//         ),
+//         SliverPadding(
+//           padding: sliverPadding,
+//           sliver: SliverToBoxAdapter(
+//             child: Text(l10n.batchTheChoir, style: textTheme.titleLarge),
+//           ),
+//         ),
+//         SliverPadding(
+//           padding: sliverPadding,
+//           sliver: SliverToBoxAdapter(
+//             child: Text(
+//               l10n.batchCommittees,
+//               style: textTheme.titleMedium,
+//               textAlign: TextAlign.center,
+//             ),
+//           ),
+//         ),
+//         SliverList(
+//           delegate: SliverChildBuilderDelegate(
+//             childCount: batch.comms.length,
+//             (context, index) {
+//               final comm = batch.comms[index];
+//               return Column(
+//                 children: [
+//                   Text(
+//                     comm.name,
+//                     style: textTheme.bodyLarge,
+//                   ),
+//                   CachedNetworkImage(
+//                     imageUrl: comm.img,
+//                     placeholder: (_, __) =>
+//                         const ShimmerPlaceholder(aspectRatio: 14 / 9),
+//                   ),
+//                   Padding(
+//                     padding: const EdgeInsets.all(4),
+//                     child: Text(
+//                       comm.members.join(', '),
+//                       style: textTheme.labelSmall,
+//                       textAlign: TextAlign.center,
+//                     ),
+//                   ),
+//                 ],
+//               );
+//             },
+//           ),
+//         ),
+//         SliverPadding(
+//           padding: sliverPadding,
+//           sliver: SliverToBoxAdapter(
+//             child: Text(
+//               l10n.batchMembers,
+//               style: textTheme.titleMedium,
+//               textAlign: TextAlign.center,
+//             ),
+//           ),
+//         ),
+//         SliverMasonryGrid.count(
+//           crossAxisCount: 2,
+//           itemBuilder: (context, index) {
+//             final section = batch.sections[index];
+//             return FilledCard(
+//               child: Padding(
+//                 padding: const EdgeInsets.all(8),
+//                 child: Column(
+//                   crossAxisAlignment: CrossAxisAlignment.start,
+//                   children: [
+//                     Center(
+//                       child: Text(
+//                         section.name,
+//                         style: textTheme.titleMedium,
+//                         textAlign: TextAlign.center,
+//                       ),
+//                     ),
+//                     const SizedBox(height: 4),
+//                     for (var i = 0; i < section.members.length; i++) ...[
+//                       if (i == 0) ...[
+//                         Row(
+//                           children: [
+//                             Flexible(
+//                               child: FittedBox(
+//                                 fit: BoxFit.scaleDown,
+//                                 child: Text(
+//                                   section.members[i],
+//                                   style: textTheme.labelLarge,
+//                                 ),
+//                               ),
+//                             ),
+//                             const SizedBox(width: 4),
+//                             Container(
+//                               padding:
+//                                   const EdgeInsets.symmetric(horizontal: 4),
+//                               decoration: ShapeDecoration(
+//                                 shape: const StadiumBorder(),
+//                                 color: context.colorScheme.primary,
+//                               ),
+//                               child: Center(
+//                                 child: Text(
+//                                   'SL',
+//                                   style: textTheme.labelSmall?.copyWith(
+//                                     color: context.colorScheme.onPrimary,
+//                                     fontWeight: FontWeight.bold,
+//                                   ),
+//                                   textAlign: TextAlign.center,
+//                                 ),
+//                               ),
+//                             ),
+//                           ],
+//                         ),
+//                       ] else ...[
+//                         FittedBox(
+//                           fit: BoxFit.scaleDown,
+//                           child: Text(
+//                             section.members[i],
+//                             style: textTheme.labelLarge,
+//                           ),
+//                         ),
+//                       ],
+//                     ]
+//                   ],
+//                 ),
+//               ),
+//             );
+//           },
+//           childCount: batch.sections.length,
+//         ),
+//         if (batch.photos != null)
+//           SliverToBoxAdapter(
+//             child: _PhotoCarousel(photos: batch.photos!),
+//           )
+//       ],
+//     );
+//   }
+// }
 
-  void _resetPageScroll() {
-    timer?.cancel();
-    timer = Timer.periodic(const Duration(seconds: 5), (timer) {
-      page++;
-      controller.animateToPage(
-        page,
-        duration: const Duration(milliseconds: 500),
-        curve: Curves.easeInOut,
-      );
-    });
-  }
+// class _PhotoCarousel extends StatefulWidget {
+//   const _PhotoCarousel({
+//     required this.photos,
+//   });
 
-  @override
-  void dispose() {
-    timer?.cancel();
-    controller.dispose();
-    super.dispose();
-  }
+//   final List<String> photos;
 
-  @override
-  Widget build(BuildContext context) {
-    return SizedBox(
-      height: context.mediaQuerySize.width * 3 / 4,
-      width: context.mediaQuerySize.width,
-      child: Stack(
-        alignment: const Alignment(0, 0.9),
-        children: [
-          PageView.builder(
-            controller: controller,
-            itemBuilder: (context, index) => CachedNetworkImage(
-              imageUrl: widget.photos[index % widget.photos.length],
-              fit: BoxFit.cover,
-            ),
-            onPageChanged: (value) {
-              page = value;
-              _resetPageScroll();
-            },
-          ),
-          SmoothPageIndicator(
-            controller: controller,
-            count: widget.photos.length,
-            effect: WormEffect(
-              activeDotColor: context.colorScheme.primary,
-              dotHeight: 12,
-              dotWidth: 12,
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-}
+//   @override
+//   State<_PhotoCarousel> createState() => _PhotoCarouselState();
+// }
+
+// class _PhotoCarouselState extends State<_PhotoCarousel> {
+//   int page = 999;
+
+//   final controller = PageController(initialPage: 999);
+//   Timer? timer;
+
+//   @override
+//   void initState() {
+//     super.initState();
+//     _resetPageScroll();
+//   }
+
+//   void _resetPageScroll() {
+//     timer?.cancel();
+//     timer = Timer.periodic(const Duration(seconds: 5), (timer) {
+//       page++;
+//       controller.animateToPage(
+//         page,
+//         duration: const Duration(milliseconds: 500),
+//         curve: Curves.easeInOut,
+//       );
+//     });
+//   }
+
+//   @override
+//   void dispose() {
+//     timer?.cancel();
+//     controller.dispose();
+//     super.dispose();
+//   }
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return SizedBox(
+//       height: context.mediaQuerySize.width * 3 / 4,
+//       width: context.mediaQuerySize.width,
+//       child: Stack(
+//         alignment: const Alignment(0, 0.9),
+//         children: [
+//           PageView.builder(
+//             controller: controller,
+//             itemBuilder: (context, index) => CachedNetworkImage(
+//               imageUrl: widget.photos[index % widget.photos.length],
+//               fit: BoxFit.cover,
+//             ),
+//             onPageChanged: (value) {
+//               page = value;
+//               _resetPageScroll();
+//             },
+//           ),
+//           SmoothPageIndicator(
+//             controller: controller,
+//             count: widget.photos.length,
+//             effect: WormEffect(
+//               activeDotColor: context.colorScheme.primary,
+//               dotHeight: 12,
+//               dotWidth: 12,
+//             ),
+//           ),
+//         ],
+//       ),
+//     );
+//   }
+// }

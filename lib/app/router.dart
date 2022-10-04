@@ -9,6 +9,8 @@ import 'package:vjchoir_archives/features/symphony_of_voices/view/symphony_of_vo
 
 export 'package:go_router/go_router.dart';
 
+// TODO(Ryan): Implement nested stateful navigation with ShellRoute.
+
 final routerProvider = Provider<GoRouter>((ref) {
   final router = RouterNotifier(ref);
 
@@ -48,23 +50,32 @@ class RouterNotifier extends ChangeNotifier {
         routes: [
           GoRoute(
             path: Routes.batches,
-            builder: (context, state) => const BatchesPage(),
+            pageBuilder: (context, state) =>
+                const NoTransitionPage(child: BatchesPage()),
             routes: [
               GoRoute(
                 path: Routes._batchId.param,
-                parentNavigatorKey: _rootNavigatorKey,
                 builder: (context, state) =>
                     BatchSubpage(batchId: state.params[Routes._batchId]!),
+                routes: [
+                  GoRoute(
+                    path: Routes._batchCommName.param,
+                    builder: (context, state) => FullscreenImageWithCaption(
+                      batchId: state.params[Routes._batchId]!,
+                      commName: state.params[Routes._batchCommName]!,
+                    ),
+                  ),
+                ],
               ),
             ],
           ),
           GoRoute(
             path: Routes.sov,
-            builder: (context, state) => const SymphonyOfVoicesPage(),
+            pageBuilder: (context, state) =>
+                const NoTransitionPage(child: SymphonyOfVoicesPage()),
             routes: [
               GoRoute(
                 path: Routes._symphonyOfVoicesId.param,
-                parentNavigatorKey: _rootNavigatorKey,
                 builder: (context, state) => SymphonyOfVoicesSubpage(
                   sovId: int.parse(state.params[Routes._symphonyOfVoicesId]!),
                 ),
@@ -73,8 +84,9 @@ class RouterNotifier extends ChangeNotifier {
           ),
           GoRoute(
             path: Routes.listen,
-            builder: (context, state) =>
-                const Center(child: Text(Routes.listen)),
+            pageBuilder: (context, state) => const NoTransitionPage(
+              child: Center(child: Text(Routes.listen)),
+            ),
           ),
         ],
       ),
@@ -93,10 +105,14 @@ class RouterNotifier extends ChangeNotifier {
 
 abstract class Routes {
   static const landing = '/';
+
   static const batches = '/batches';
   static const _batchId = 'batchId';
+  static const _batchCommName = 'commName';
+
   static const sov = '/sov';
   static const _symphonyOfVoicesId = 'sovId';
+
   static const listen = '/listen';
 }
 

@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:vjchoir_archives/app/router.dart';
 import 'package:vjchoir_archives/features/symphony_of_voices/controllers/controllers.dart';
+import 'package:vjchoir_archives/utils/utils.dart';
 import 'package:vjchoir_archives/widgets/widgets.dart';
 
 class SymphonyOfVoicesPage extends ConsumerWidget {
@@ -13,11 +14,7 @@ class SymphonyOfVoicesPage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final symphonyOfVoices = ref.watch(symphonyOfVoicesControllerProvider);
 
-    return symphonyOfVoices.when(
-      error: (error, stackTrace) => Center(
-        child: Text(error.toString()),
-      ),
-      loading: () => const Center(child: CircularProgressIndicator.adaptive()),
+    return symphonyOfVoices.buildWhen(
       data: (data) {
         return MasonryGridView.count(
           crossAxisCount: 2,

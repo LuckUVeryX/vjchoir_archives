@@ -19,6 +19,7 @@ final routerProvider = Provider<GoRouter>((ref) {
     refreshListenable: router,
     redirect: router._redirectLogic,
     routes: router._routes,
+    errorBuilder: (context, state) => _ErrorScreen(state.error),
   );
 });
 
@@ -51,15 +52,9 @@ class RouterNotifier extends ChangeNotifier {
             routes: [
               GoRoute(
                 path: Routes._batchId.param,
+                parentNavigatorKey: _rootNavigatorKey,
                 builder: (context, state) =>
                     BatchSubpage(batchId: state.params[Routes._batchId]!),
-                routes: [
-                  GoRoute(
-                    path: Routes._batchComm.param,
-                    parentNavigatorKey: _rootNavigatorKey,
-                    builder: (context, state) => const Scaffold(),
-                  )
-                ],
               ),
             ],
           ),
@@ -100,7 +95,6 @@ abstract class Routes {
   static const landing = '/';
   static const batches = '/batches';
   static const _batchId = 'batchId';
-  static const _batchComm = 'comm';
   static const sov = '/sov';
   static const _symphonyOfVoicesId = 'sovId';
   static const listen = '/listen';
@@ -108,4 +102,36 @@ abstract class Routes {
 
 extension _RouteParamsX on String {
   String get param => ':${this}';
+}
+
+/// Default error page implementation for WidgetsApp.
+class _ErrorScreen extends ConsumerWidget {
+  /// Provide an exception to this page for it to be displayed.
+  const _ErrorScreen(this.error);
+
+  /// The exception to be displayed.
+  final Exception? error;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    return Scaffold(
+      appBar: AppBar(title: const Text('Page Not Found')),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            SelectableText(error?.toString() ?? 'page not found'),
+            TextButton(
+              onPressed: () {
+                ref.read(rootControllerProvider.notifier).state =
+                    RootPageTab.sov;
+                context.go('/');
+              },
+              child: const Text('Home'),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
 }

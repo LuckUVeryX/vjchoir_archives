@@ -14,11 +14,7 @@ class BatchesPage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final batches = ref.watch(batchesControllerProvider);
 
-    return batches.when(
-      error: (error, stackTrace) => Center(child: Text(error.toString())),
-      loading: () => const Center(
-        child: CircularProgressIndicator.adaptive(),
-      ),
+    return batches.buildWhen(
       data: (data) {
         final cardColors = [
           context.colorScheme.primary,

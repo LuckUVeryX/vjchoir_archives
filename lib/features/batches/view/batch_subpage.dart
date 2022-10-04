@@ -2,6 +2,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:vjchoir_archives/features/batches/controllers/controllers.dart';
 import 'package:vjchoir_archives/features/batches/view/widgets/widgets.dart';
 import 'package:vjchoir_archives/l10n/l10n.dart';
@@ -46,17 +47,18 @@ class _BatchSubpageView extends StatelessWidget {
 
     return CustomScrollView(
       slivers: [
-        const SliverAppBar(floating: true),
+        SliverAppBar(floating: true, title: Text(batch.name)),
         SliverPadding(
           padding: const EdgeInsets.symmetric(horizontal: 12),
           sliver: SliverList(
             delegate: SliverChildListDelegate.fixed([
-              Text(l10n.batchTheChoir, style: textTheme.headlineLarge),
+              Text(l10n.batchTheChoir, style: textTheme.headlineSmall),
               Card(
                 clipBehavior: Clip.antiAlias,
                 margin: EdgeInsets.zero,
                 child: CachedNetworkImage(imageUrl: batch.image),
               ),
+              const SizedBox(height: 12),
               Text(l10n.batchCommittees, style: textTheme.headlineSmall),
             ]),
           ),
@@ -96,8 +98,73 @@ class _BatchSubpageView extends StatelessWidget {
               );
             }),
           ),
+        ),
+        SliverPadding(
+          padding: const EdgeInsets.fromLTRB(12, 12, 12, 0),
+          sliver: SliverToBoxAdapter(
+            child: Text(l10n.batchMembers, style: textTheme.headlineSmall),
+          ),
+        ),
+        SliverPadding(
+          padding: const EdgeInsets.fromLTRB(8, 0, 8, 40),
+          sliver: SliverMasonryGrid(
+            delegate: SliverChildBuilderDelegate(
+                childCount: batch.sections.length, (context, index) {
+              final section = batch.sections[index];
+              return Card(
+                child: Column(
+                  children: [
+                    const SizedBox(height: 8),
+                    Text(
+                      section.name,
+                      style: textTheme.titleMedium,
+                      textAlign: TextAlign.center,
+                    ),
+                    for (var i = 0; i < section.members.length; i++) ...[
+                      ListTile(
+                        visualDensity: VisualDensity.compact,
+                        dense: true,
+                        title: Text(
+                          section.members[i],
+                          style: textTheme.labelSmall,
+                        ),
+                        trailing: i == 0 ? const _SlLabel() : null,
+                      ),
+                    ],
+                  ],
+                ),
+              );
+            }),
+            gridDelegate: const SliverSimpleGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 2,
+            ),
+          ),
         )
       ],
+    );
+  }
+}
+
+class _SlLabel extends StatelessWidget {
+  const _SlLabel();
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.symmetric(
+        horizontal: 4,
+        vertical: 2,
+      ),
+      decoration: ShapeDecoration(
+        shape: const StadiumBorder(),
+        color: context.colorScheme.primary,
+      ),
+      child: Text(
+        'SL',
+        style: context.textTheme.labelSmall?.copyWith(
+          color: context.colorScheme.onPrimary,
+        ),
+      ),
     );
   }
 }

@@ -2,7 +2,9 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:vjchoir_archives/features/symphony_of_voices/controllers/controllers.dart';
+import 'package:vjchoir_archives/features/symphony_of_voices/models/models.dart';
 import 'package:vjchoir_archives/l10n/l10n.dart';
 import 'package:vjchoir_archives/utils/utils.dart';
 import 'package:vjchoir_archives/widgets/widgets.dart';
@@ -43,19 +45,10 @@ class _SymphonyOfVoicesSubPageView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final l10n = context.l10n;
-    final textTheme = context.textTheme;
 
     return CustomScrollView(
       slivers: [
         SliverAppBar(
-          actions: [
-            IconButton(
-              onPressed: () {
-                // TODO(Ryan): Show links
-              },
-              icon: const Icon(Icons.link_rounded),
-            )
-          ],
           title: _InvisibleExpandedHeader(
             child: Text(
               sov.abbr,
@@ -73,12 +66,6 @@ class _SymphonyOfVoicesSubPageView extends StatelessWidget {
             ),
           ),
         ),
-        SliverToBoxAdapter(
-          child: Padding(
-            padding: const EdgeInsets.fromLTRB(8, 12, 8, 0),
-            child: Text(l10n.sovRepertoire, style: textTheme.headlineSmall),
-          ),
-        ),
         SliverList(
           delegate: SliverChildBuilderDelegate(
             childCount: sov.repertoire.length,
@@ -94,8 +81,88 @@ class _SymphonyOfVoicesSubPageView extends StatelessWidget {
             },
           ),
         ),
+        SliverToBoxAdapter(
+          child: _ExternalLinks(sov: sov),
+        ),
       ],
     );
+  }
+}
+
+class _ExternalLinks extends ConsumerWidget {
+  const _ExternalLinks({
+    required this.sov,
+  });
+
+  final Sov sov;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final controller =
+        ref.watch(externalLinksControllerProvider(sov.links).notifier);
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        if (controller.youtubeLinks.isNotEmpty)
+          IconButton(
+            onPressed: () => _openExternalLink(
+              context: context,
+              links: controller.youtubeLinks,
+            ),
+            icon: const Icon(FontAwesomeIcons.youtube),
+          ),
+        if (controller.googleDriveLinks.isNotEmpty)
+          IconButton(
+            onPressed: () => _openExternalLink(
+              context: context,
+              links: controller.googleDriveLinks,
+            ),
+            icon: const Icon(FontAwesomeIcons.googleDrive),
+          ),
+        if (controller.dropboxLinks.isNotEmpty)
+          IconButton(
+            onPressed: () => _openExternalLink(
+              context: context,
+              links: controller.dropboxLinks,
+            ),
+            icon: const Icon(FontAwesomeIcons.dropbox),
+          ),
+        if (controller.unknownLinks.isNotEmpty)
+          IconButton(
+            onPressed: () => _openExternalLink(
+              context: context,
+              links: controller.unknownLinks,
+            ),
+            icon: const Icon(FontAwesomeIcons.download),
+          ),
+      ],
+    );
+  }
+
+  void _openExternalLink({
+    required BuildContext context,
+    required Iterable<ExternalLinks> links,
+  }) {
+    if (links.length == 1) {
+      launchUrl(links.first.url);
+    } else {
+      showDialog<void>(
+        context: context,
+        builder: (context) => SimpleDialog(
+          children: [
+            for (final link in links) ...[
+              ListTile(
+                dense: true,
+                visualDensity: VisualDensity.compact,
+                title: Text(link.name ?? link.url),
+                subtitle: link.name == null ? null : Text(link.url),
+                onTap: () => launchUrl(link.url),
+              )
+            ],
+          ],
+        ),
+      );
+    }
   }
 }
 

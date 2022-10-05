@@ -20,7 +20,9 @@ DownloadLinksSection _$DownloadLinksSectionFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$DownloadLinksSection {
-  String get title => throw _privateConstructorUsedError;
+// ignore: invalid_annotation_target
+  @JsonKey(name: 'title')
+  DownloadLinksType get type => throw _privateConstructorUsedError;
   String get desc => throw _privateConstructorUsedError;
   List<DownloadLink>? get links => throw _privateConstructorUsedError;
 
@@ -35,7 +37,10 @@ abstract class $DownloadLinksSectionCopyWith<$Res> {
   factory $DownloadLinksSectionCopyWith(DownloadLinksSection value,
           $Res Function(DownloadLinksSection) then) =
       _$DownloadLinksSectionCopyWithImpl<$Res>;
-  $Res call({String title, String desc, List<DownloadLink>? links});
+  $Res call(
+      {@JsonKey(name: 'title') DownloadLinksType type,
+      String desc,
+      List<DownloadLink>? links});
 }
 
 /// @nodoc
@@ -49,15 +54,15 @@ class _$DownloadLinksSectionCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object? title = freezed,
+    Object? type = freezed,
     Object? desc = freezed,
     Object? links = freezed,
   }) {
     return _then(_value.copyWith(
-      title: title == freezed
-          ? _value.title
-          : title // ignore: cast_nullable_to_non_nullable
-              as String,
+      type: type == freezed
+          ? _value.type
+          : type // ignore: cast_nullable_to_non_nullable
+              as DownloadLinksType,
       desc: desc == freezed
           ? _value.desc
           : desc // ignore: cast_nullable_to_non_nullable
@@ -77,7 +82,10 @@ abstract class _$$_DownloadLinksSectionCopyWith<$Res>
           $Res Function(_$_DownloadLinksSection) then) =
       __$$_DownloadLinksSectionCopyWithImpl<$Res>;
   @override
-  $Res call({String title, String desc, List<DownloadLink>? links});
+  $Res call(
+      {@JsonKey(name: 'title') DownloadLinksType type,
+      String desc,
+      List<DownloadLink>? links});
 }
 
 /// @nodoc
@@ -93,15 +101,15 @@ class __$$_DownloadLinksSectionCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object? title = freezed,
+    Object? type = freezed,
     Object? desc = freezed,
     Object? links = freezed,
   }) {
     return _then(_$_DownloadLinksSection(
-      title: title == freezed
-          ? _value.title
-          : title // ignore: cast_nullable_to_non_nullable
-              as String,
+      type: type == freezed
+          ? _value.type
+          : type // ignore: cast_nullable_to_non_nullable
+              as DownloadLinksType,
       desc: desc == freezed
           ? _value.desc
           : desc // ignore: cast_nullable_to_non_nullable
@@ -118,7 +126,7 @@ class __$$_DownloadLinksSectionCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_DownloadLinksSection implements _DownloadLinksSection {
   const _$_DownloadLinksSection(
-      {required this.title,
+      {@JsonKey(name: 'title') required this.type,
       required this.desc,
       final List<DownloadLink>? links})
       : _links = links;
@@ -126,8 +134,10 @@ class _$_DownloadLinksSection implements _DownloadLinksSection {
   factory _$_DownloadLinksSection.fromJson(Map<String, dynamic> json) =>
       _$$_DownloadLinksSectionFromJson(json);
 
+// ignore: invalid_annotation_target
   @override
-  final String title;
+  @JsonKey(name: 'title')
+  final DownloadLinksType type;
   @override
   final String desc;
   final List<DownloadLink>? _links;
@@ -141,7 +151,7 @@ class _$_DownloadLinksSection implements _DownloadLinksSection {
 
   @override
   String toString() {
-    return 'DownloadLinksSection(title: $title, desc: $desc, links: $links)';
+    return 'DownloadLinksSection(type: $type, desc: $desc, links: $links)';
   }
 
   @override
@@ -149,7 +159,7 @@ class _$_DownloadLinksSection implements _DownloadLinksSection {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_DownloadLinksSection &&
-            const DeepCollectionEquality().equals(other.title, title) &&
+            const DeepCollectionEquality().equals(other.type, type) &&
             const DeepCollectionEquality().equals(other.desc, desc) &&
             const DeepCollectionEquality().equals(other._links, _links));
   }
@@ -158,7 +168,7 @@ class _$_DownloadLinksSection implements _DownloadLinksSection {
   @override
   int get hashCode => Object.hash(
       runtimeType,
-      const DeepCollectionEquality().hash(title),
+      const DeepCollectionEquality().hash(type),
       const DeepCollectionEquality().hash(desc),
       const DeepCollectionEquality().hash(_links));
 
@@ -178,15 +188,16 @@ class _$_DownloadLinksSection implements _DownloadLinksSection {
 
 abstract class _DownloadLinksSection implements DownloadLinksSection {
   const factory _DownloadLinksSection(
-      {required final String title,
+      {@JsonKey(name: 'title') required final DownloadLinksType type,
       required final String desc,
       final List<DownloadLink>? links}) = _$_DownloadLinksSection;
 
   factory _DownloadLinksSection.fromJson(Map<String, dynamic> json) =
       _$_DownloadLinksSection.fromJson;
 
-  @override
-  String get title;
+  @override // ignore: invalid_annotation_target
+  @JsonKey(name: 'title')
+  DownloadLinksType get type;
   @override
   String get desc;
   @override

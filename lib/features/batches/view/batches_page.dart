@@ -46,7 +46,7 @@ class BatchesPage extends ConsumerWidget {
                         child: Transform(
                           transform: Matrix4.identity()
                             ..rotateZ(math.pi / 6)
-                            ..translate(24 / 1, -16 / 1),
+                            ..translate(32 / 1, -24 / 1),
                           child: ClipRRect(
                             borderRadius: BorderRadius.circular(12),
                             child: CachedNetworkImage(

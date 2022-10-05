@@ -31,7 +31,11 @@ class SymphonyOfVoicesPage extends ConsumerWidget {
                 ),
                 listTile: ListTile(
                   dense: true,
-                  title: Text(sov.abbr),
+                  title: Text(
+                    sov.abbr,
+                    style: context.textTheme.titleMedium
+                        ?.copyWith(fontSize: 13, color: Colors.white),
+                  ),
                 ),
               ),
               onTap: () => context.go('${Routes.sov}/${sov.id}'),

@@ -20,7 +20,12 @@ DownloadLink _$DownloadLinkFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$DownloadLink {
-  String? get title => throw _privateConstructorUsedError;
+// ignore: invalid_annotation_target
+  @JsonKey(
+      name: 'title',
+      fromJson: _platformTypeFromJson,
+      toJson: _platformTypeToJson)
+  PlatformType get platformType => throw _privateConstructorUsedError;
   String? get link => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -34,7 +39,10 @@ abstract class $DownloadLinkCopyWith<$Res> {
   factory $DownloadLinkCopyWith(
           DownloadLink value, $Res Function(DownloadLink) then) =
       _$DownloadLinkCopyWithImpl<$Res>;
-  $Res call({String? title, String? link});
+  $Res call(
+      {@JsonKey(name: 'title', fromJson: _platformTypeFromJson, toJson: _platformTypeToJson)
+          PlatformType platformType,
+      String? link});
 }
 
 /// @nodoc
@@ -47,14 +55,14 @@ class _$DownloadLinkCopyWithImpl<$Res> implements $DownloadLinkCopyWith<$Res> {
 
   @override
   $Res call({
-    Object? title = freezed,
+    Object? platformType = freezed,
     Object? link = freezed,
   }) {
     return _then(_value.copyWith(
-      title: title == freezed
-          ? _value.title
-          : title // ignore: cast_nullable_to_non_nullable
-              as String?,
+      platformType: platformType == freezed
+          ? _value.platformType
+          : platformType // ignore: cast_nullable_to_non_nullable
+              as PlatformType,
       link: link == freezed
           ? _value.link
           : link // ignore: cast_nullable_to_non_nullable
@@ -70,7 +78,10 @@ abstract class _$$_DownloadLinkCopyWith<$Res>
           _$_DownloadLink value, $Res Function(_$_DownloadLink) then) =
       __$$_DownloadLinkCopyWithImpl<$Res>;
   @override
-  $Res call({String? title, String? link});
+  $Res call(
+      {@JsonKey(name: 'title', fromJson: _platformTypeFromJson, toJson: _platformTypeToJson)
+          PlatformType platformType,
+      String? link});
 }
 
 /// @nodoc
@@ -86,14 +97,14 @@ class __$$_DownloadLinkCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object? title = freezed,
+    Object? platformType = freezed,
     Object? link = freezed,
   }) {
     return _then(_$_DownloadLink(
-      title: title == freezed
-          ? _value.title
-          : title // ignore: cast_nullable_to_non_nullable
-              as String?,
+      platformType: platformType == freezed
+          ? _value.platformType
+          : platformType // ignore: cast_nullable_to_non_nullable
+              as PlatformType,
       link: link == freezed
           ? _value.link
           : link // ignore: cast_nullable_to_non_nullable
@@ -105,19 +116,27 @@ class __$$_DownloadLinkCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$_DownloadLink implements _DownloadLink {
-  const _$_DownloadLink({this.title, this.link});
+  const _$_DownloadLink(
+      {@JsonKey(name: 'title', fromJson: _platformTypeFromJson, toJson: _platformTypeToJson)
+          required this.platformType,
+      this.link});
 
   factory _$_DownloadLink.fromJson(Map<String, dynamic> json) =>
       _$$_DownloadLinkFromJson(json);
 
+// ignore: invalid_annotation_target
   @override
-  final String? title;
+  @JsonKey(
+      name: 'title',
+      fromJson: _platformTypeFromJson,
+      toJson: _platformTypeToJson)
+  final PlatformType platformType;
   @override
   final String? link;
 
   @override
   String toString() {
-    return 'DownloadLink(title: $title, link: $link)';
+    return 'DownloadLink(platformType: $platformType, link: $link)';
   }
 
   @override
@@ -125,7 +144,8 @@ class _$_DownloadLink implements _DownloadLink {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_DownloadLink &&
-            const DeepCollectionEquality().equals(other.title, title) &&
+            const DeepCollectionEquality()
+                .equals(other.platformType, platformType) &&
             const DeepCollectionEquality().equals(other.link, link));
   }
 
@@ -133,7 +153,7 @@ class _$_DownloadLink implements _DownloadLink {
   @override
   int get hashCode => Object.hash(
       runtimeType,
-      const DeepCollectionEquality().hash(title),
+      const DeepCollectionEquality().hash(platformType),
       const DeepCollectionEquality().hash(link));
 
   @JsonKey(ignore: true)
@@ -150,14 +170,20 @@ class _$_DownloadLink implements _DownloadLink {
 }
 
 abstract class _DownloadLink implements DownloadLink {
-  const factory _DownloadLink({final String? title, final String? link}) =
-      _$_DownloadLink;
+  const factory _DownloadLink(
+      {@JsonKey(name: 'title', fromJson: _platformTypeFromJson, toJson: _platformTypeToJson)
+          required final PlatformType platformType,
+      final String? link}) = _$_DownloadLink;
 
   factory _DownloadLink.fromJson(Map<String, dynamic> json) =
       _$_DownloadLink.fromJson;
 
-  @override
-  String? get title;
+  @override // ignore: invalid_annotation_target
+  @JsonKey(
+      name: 'title',
+      fromJson: _platformTypeFromJson,
+      toJson: _platformTypeToJson)
+  PlatformType get platformType;
   @override
   String? get link;
   @override

@@ -5,7 +5,6 @@ import 'package:vjchoir_archives/features/batches/batches.dart';
 import 'package:vjchoir_archives/features/landing/landing.dart';
 import 'package:vjchoir_archives/features/root/root.dart';
 import 'package:vjchoir_archives/features/symphony_of_voices/symphony_of_voices.dart';
-import 'package:vjchoir_archives/features/symphony_of_voices/view/symphony_of_voices_subpage.dart';
 
 export 'package:go_router/go_router.dart';
 

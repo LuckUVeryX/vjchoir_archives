@@ -17,9 +17,9 @@ class ImageWithTitle extends StatelessWidget {
       children: [
         ShaderMask(
           shaderCallback: (bounds) {
-            return const LinearGradient(
-              colors: [Colors.transparent, Colors.black],
-              stops: [0.75, 1],
+            return LinearGradient(
+              colors: [Colors.transparent, Colors.grey.shade900],
+              stops: const [2 / 3, 1],
               begin: Alignment.topCenter,
               end: Alignment.bottomCenter,
             ).createShader(Rect.fromLTRB(0, 0, bounds.width, bounds.height));

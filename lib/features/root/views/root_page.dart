@@ -35,10 +35,6 @@ class RootPage extends ConsumerWidget {
             icon: const Icon(FontAwesomeIcons.recordVinyl),
             label: l10n.rootSOV,
           ),
-          NavigationDestination(
-            icon: const Icon(FontAwesomeIcons.headphones),
-            label: l10n.rootListen,
-          ),
         ],
       ),
       bottomSheet: const MusicPlayer(),

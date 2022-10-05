@@ -36,10 +36,6 @@
     "@rootSOV": {
         "description": "Label for SOV in root page."
     },
-    "rootListen": "Listen",
-    "@rootListen": {
-        "description": "Label for Listen in root page."
-    },
     "batchTheChoir": "The Choir",
     "@batchTheChoir": {
         "description": "The choir label for the batches page."

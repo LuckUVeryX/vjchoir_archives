@@ -81,12 +81,6 @@ class RouterNotifier extends ChangeNotifier {
               ),
             ],
           ),
-          GoRoute(
-            path: Routes.listen,
-            pageBuilder: (context, state) => const NoTransitionPage(
-              child: Center(child: Text(Routes.listen)),
-            ),
-          ),
         ],
       ),
     ];
@@ -111,8 +105,6 @@ abstract class Routes {
 
   static const sov = '/sov';
   static const _symphonyOfVoicesId = 'sovId';
-
-  static const listen = '/listen';
 }
 
 extension _RouteParamsX on String {

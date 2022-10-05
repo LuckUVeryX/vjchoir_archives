@@ -13,8 +13,10 @@ class MusicPlayer extends StatelessWidget {
     return Card(
       // TODO(Ryan): Use color of album to generate player color
       color: context.colorScheme.primary,
-      margin: EdgeInsets.zero,
+      margin: const EdgeInsets.fromLTRB(4, 0, 4, 4),
       child: ListTile(
+        dense: true,
+        textColor: context.colorScheme.onPrimary,
         leading: ClipRRect(
           borderRadius: BorderRadius.circular(4),
           child: SizedBox.square(
@@ -26,15 +28,11 @@ class MusicPlayer extends StatelessWidget {
             ),
           ),
         ),
-        title: Text(
+        title: const Text(
           'GANADARA (Feat. IU)',
-          style: context.textTheme.titleMedium
-              ?.copyWith(color: context.colorScheme.onPrimary),
         ),
-        subtitle: Text(
+        subtitle: const Text(
           'Jay Park, IU',
-          style: context.textTheme.bodySmall
-              ?.copyWith(color: context.colorScheme.onPrimary),
         ),
         trailing: Wrap(
           children: [

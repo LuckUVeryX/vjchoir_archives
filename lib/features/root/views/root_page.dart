@@ -18,7 +18,11 @@ class RootPage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = context.l10n;
     return Scaffold(
-      body: child,
+      body: Padding(
+        // Account space for music player
+        padding: const EdgeInsets.only(bottom: 72),
+        child: child,
+      ),
       bottomNavigationBar: NavigationBar(
         selectedIndex: ref.watch(rootControllerProvider).index,
         onDestinationSelected: (index) {

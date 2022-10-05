@@ -101,11 +101,22 @@ class GithubVjchoirArchivesApi extends VjchoirArchivesApi {
     final newSov = <Sov>[];
 
     for (final sov in symphonyOfVoices.sov) {
+      final newRepertoire = <Repertoire>[];
+      for (final repertoire in sov.repertoire) {
+        newRepertoire.add(
+          repertoire.copyWith(
+            mp3: Uri.encodeFull(
+              'https://github.com/vjchoir/vjchoir.github.io/blob/master/assets/audio/${sov.abbr}/${repertoire.mp3}.mp3?raw=true',
+            ),
+          ),
+        );
+      }
       newSov.add(
         sov.copyWith(
           artwork: 'https://${p.normalize(
             '$_baseUrl/$_assetPath/${sov.artwork.replaceFirst('../', '')}',
           )}',
+          repertoire: newRepertoire,
         ),
       );
     }

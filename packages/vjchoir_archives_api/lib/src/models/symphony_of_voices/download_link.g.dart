@@ -8,12 +8,12 @@ part of 'download_link.dart';
 
 _$_DownloadLink _$$_DownloadLinkFromJson(Map<String, dynamic> json) =>
     _$_DownloadLink(
-      title: json['title'] as String?,
+      platformType: _platformTypeFromJson(json['title'] as String?),
       link: json['link'] as String?,
     );
 
 Map<String, dynamic> _$$_DownloadLinkToJson(_$_DownloadLink instance) =>
     <String, dynamic>{
-      'title': instance.title,
+      'title': _platformTypeToJson(instance.platformType),
       'link': instance.link,
     };

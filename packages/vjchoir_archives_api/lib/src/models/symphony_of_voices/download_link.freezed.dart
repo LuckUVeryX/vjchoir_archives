@@ -25,7 +25,7 @@ mixin _$DownloadLink {
       name: 'title',
       fromJson: _platformTypeFromJson,
       toJson: _platformTypeToJson)
-  PlatformType? get platformType => throw _privateConstructorUsedError;
+  PlatformType get platformType => throw _privateConstructorUsedError;
   String? get link => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -41,7 +41,7 @@ abstract class $DownloadLinkCopyWith<$Res> {
       _$DownloadLinkCopyWithImpl<$Res>;
   $Res call(
       {@JsonKey(name: 'title', fromJson: _platformTypeFromJson, toJson: _platformTypeToJson)
-          PlatformType? platformType,
+          PlatformType platformType,
       String? link});
 }
 
@@ -62,7 +62,7 @@ class _$DownloadLinkCopyWithImpl<$Res> implements $DownloadLinkCopyWith<$Res> {
       platformType: platformType == freezed
           ? _value.platformType
           : platformType // ignore: cast_nullable_to_non_nullable
-              as PlatformType?,
+              as PlatformType,
       link: link == freezed
           ? _value.link
           : link // ignore: cast_nullable_to_non_nullable
@@ -80,7 +80,7 @@ abstract class _$$_DownloadLinkCopyWith<$Res>
   @override
   $Res call(
       {@JsonKey(name: 'title', fromJson: _platformTypeFromJson, toJson: _platformTypeToJson)
-          PlatformType? platformType,
+          PlatformType platformType,
       String? link});
 }
 
@@ -104,7 +104,7 @@ class __$$_DownloadLinkCopyWithImpl<$Res>
       platformType: platformType == freezed
           ? _value.platformType
           : platformType // ignore: cast_nullable_to_non_nullable
-              as PlatformType?,
+              as PlatformType,
       link: link == freezed
           ? _value.link
           : link // ignore: cast_nullable_to_non_nullable
@@ -118,7 +118,7 @@ class __$$_DownloadLinkCopyWithImpl<$Res>
 class _$_DownloadLink implements _DownloadLink {
   const _$_DownloadLink(
       {@JsonKey(name: 'title', fromJson: _platformTypeFromJson, toJson: _platformTypeToJson)
-          this.platformType,
+          required this.platformType,
       this.link});
 
   factory _$_DownloadLink.fromJson(Map<String, dynamic> json) =>
@@ -130,7 +130,7 @@ class _$_DownloadLink implements _DownloadLink {
       name: 'title',
       fromJson: _platformTypeFromJson,
       toJson: _platformTypeToJson)
-  final PlatformType? platformType;
+  final PlatformType platformType;
   @override
   final String? link;
 
@@ -172,7 +172,7 @@ class _$_DownloadLink implements _DownloadLink {
 abstract class _DownloadLink implements DownloadLink {
   const factory _DownloadLink(
       {@JsonKey(name: 'title', fromJson: _platformTypeFromJson, toJson: _platformTypeToJson)
-          final PlatformType? platformType,
+          required final PlatformType platformType,
       final String? link}) = _$_DownloadLink;
 
   factory _DownloadLink.fromJson(Map<String, dynamic> json) =
@@ -183,7 +183,7 @@ abstract class _DownloadLink implements DownloadLink {
       name: 'title',
       fromJson: _platformTypeFromJson,
       toJson: _platformTypeToJson)
-  PlatformType? get platformType;
+  PlatformType get platformType;
   @override
   String? get link;
   @override

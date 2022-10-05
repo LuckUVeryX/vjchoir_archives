@@ -21,7 +21,7 @@ class DownloadLink with _$DownloadLink {
       fromJson: _platformTypeFromJson,
       toJson: _platformTypeToJson,
     )
-        PlatformType? platformType,
+        required PlatformType platformType,
     String? link,
   }) = _DownloadLink;
 
@@ -32,22 +32,18 @@ class DownloadLink with _$DownloadLink {
 
 enum PlatformType { googleDrive, dropbox, unknown }
 
-String? _platformTypeToJson(PlatformType? value) {
-  if (value == null) return null;
-
+String _platformTypeToJson(PlatformType value) {
   switch (value) {
     case PlatformType.googleDrive:
       return 'Google Drive';
     case PlatformType.dropbox:
       return 'Dropbox';
     case PlatformType.unknown:
-      return null;
+      return '';
   }
 }
 
-PlatformType? _platformTypeFromJson(String? value) {
-  if (value == null) return null;
-
+PlatformType _platformTypeFromJson(String value) {
   switch (value) {
     case 'Google Drive':
       return PlatformType.googleDrive;

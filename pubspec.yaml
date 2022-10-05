@@ -27,6 +27,7 @@ dependencies:
   shared_preferences: ^2.0.15
   shimmer: ^2.0.0
   smooth_page_indicator: ^1.0.0+2
+  url_launcher: ^6.1.6
   vjchoir_archives_api:
     path: packages/vjchoir_archives_api
   vjchoir_archives_repository:

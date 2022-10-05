@@ -101,39 +101,40 @@ class _ExternalLinks extends ConsumerWidget {
     final controller =
         ref.watch(externalLinksControllerProvider(sov.links).notifier);
     return Row(
+      mainAxisSize: MainAxisSize.min,
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         if (controller.youtubeLinks.isNotEmpty)
-          IconButton(
+          _IconButtonWithDivider(
+            icon: FontAwesomeIcons.youtube,
             onPressed: () => _openExternalLink(
               context: context,
               links: controller.youtubeLinks,
             ),
-            icon: const Icon(FontAwesomeIcons.youtube),
           ),
         if (controller.googleDriveLinks.isNotEmpty)
-          IconButton(
+          _IconButtonWithDivider(
+            icon: FontAwesomeIcons.googleDrive,
             onPressed: () => _openExternalLink(
               context: context,
               links: controller.googleDriveLinks,
             ),
-            icon: const Icon(FontAwesomeIcons.googleDrive),
           ),
         if (controller.dropboxLinks.isNotEmpty)
-          IconButton(
+          _IconButtonWithDivider(
+            icon: FontAwesomeIcons.dropbox,
             onPressed: () => _openExternalLink(
               context: context,
               links: controller.dropboxLinks,
             ),
-            icon: const Icon(FontAwesomeIcons.dropbox),
           ),
         if (controller.unknownLinks.isNotEmpty)
-          IconButton(
+          _IconButtonWithDivider(
+            icon: FontAwesomeIcons.download,
             onPressed: () => _openExternalLink(
               context: context,
               links: controller.unknownLinks,
             ),
-            icon: const Icon(FontAwesomeIcons.download),
           ),
       ],
     );
@@ -163,6 +164,29 @@ class _ExternalLinks extends ConsumerWidget {
         ),
       );
     }
+  }
+}
+
+class _IconButtonWithDivider extends StatelessWidget {
+  const _IconButtonWithDivider({
+    this.onPressed,
+    required this.icon,
+  });
+
+  final VoidCallback? onPressed;
+  final IconData icon;
+
+  @override
+  Widget build(BuildContext context) {
+    return IntrinsicWidth(
+      child: Column(
+        children: [
+          const Divider(thickness: 4),
+          IconButton(onPressed: onPressed, icon: Icon(icon)),
+          const SizedBox(height: 12),
+        ],
+      ),
+    );
   }
 }
 

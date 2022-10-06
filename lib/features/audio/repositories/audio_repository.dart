@@ -3,8 +3,10 @@ import 'dart:developer';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:just_audio/just_audio.dart';
+import 'package:just_audio_background/just_audio_background.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:vjchoir_archives/features/audio/models/models.dart';
+
 export 'package:just_audio/just_audio.dart' show PlayerException;
 
 final audioRepositoryProvider = Provider<AudioRepository>((ref) {
@@ -36,14 +38,24 @@ class AudioRepository {
   Stream<int?> get playListIndex => _player.currentIndexStream;
 
   Future<void> setPlaylist({
-    required List<String> urls,
-    int? initialIndex,
+    required Playlist playlist,
   }) async {
-    final playlist = ConcatenatingAudioSource(
-      children: urls.map((e) => AudioSource.uri(Uri.parse(e))).toList(),
+    final source = ConcatenatingAudioSource(
+      children: playlist.repertoires
+          .map(
+            (e) => AudioSource.uri(
+              Uri.parse(e.mp3),
+              tag: MediaItem(
+                id: e.name,
+                title: e.name,
+                artUri: Uri.parse(playlist.artwork),
+              ),
+            ),
+          )
+          .toList(),
     );
     try {
-      await _player.setAudioSource(playlist, initialIndex: initialIndex);
+      await _player.setAudioSource(source, initialIndex: playlist.index);
     } on PlayerException catch (e) {
       // iOS/macOS: maps to NSError.code
       // Android: maps to ExoPlayerException.type

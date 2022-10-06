@@ -50,7 +50,7 @@ class AudioRepository {
       return const AudioModel.loading();
     }
 
-    if (!isPlaying) {
+    if (!isPlaying || processingState == ProcessingState.completed) {
       return const AudioModel.paused();
     } else {
       return const AudioModel.playing();

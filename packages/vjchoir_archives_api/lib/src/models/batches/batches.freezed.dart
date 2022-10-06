@@ -102,11 +102,6 @@ class _$_Batches implements _Batches {
   }
 
   @override
-  String toString() {
-    return 'Batches(batches: $batches)';
-  }
-
-  @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&

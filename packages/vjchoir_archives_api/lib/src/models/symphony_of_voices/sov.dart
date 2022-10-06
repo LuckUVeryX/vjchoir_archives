@@ -13,7 +13,7 @@ part 'sov.g.dart';
 /// Includes list of [Repertoire] songs, and URL [links] to the SOV.
 ///
 /// {@endtemplate}
-@freezed
+@Freezed(toStringOverride: false)
 class Sov with _$Sov {
   /// {@macro sov}
   factory Sov({

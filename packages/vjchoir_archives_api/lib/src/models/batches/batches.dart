@@ -9,7 +9,7 @@ part 'batches.g.dart';
 /// [Batches] provides a list of Vjchoir [Batch]es over the years.
 ///
 /// {@endtemplate batches}
-@freezed
+@Freezed(toStringOverride: false)
 class Batches with _$Batches {
   /// {@macro batches}
   factory Batches({

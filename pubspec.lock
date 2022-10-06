@@ -423,10 +423,12 @@ packages:
   just_audio:
     dependency: "direct main"
     description:
-      name: just_audio
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.9.29"
+      path: just_audio
+      ref: "feature/treadmill"
+      resolved-ref: "6079a481c48f66cec779053f40eeaf091cd0bdd7"
+      url: "https://github.com/ryanheise/just_audio.git"
+    source: git
+    version: "0.9.26"
   just_audio_platform_interface:
     dependency: transitive
     description:

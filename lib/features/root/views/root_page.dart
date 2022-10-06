@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:vjchoir_archives/app/router.dart';
+import 'package:vjchoir_archives/features/audio/audio.dart';
 import 'package:vjchoir_archives/features/root/controller/controller.dart';
 import 'package:vjchoir_archives/l10n/l10n.dart';
 
@@ -17,7 +18,13 @@ class RootPage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = context.l10n;
     return Scaffold(
-      body: child,
+      body: Padding(
+        // Account space for music player
+        padding: EdgeInsets.only(
+          bottom: ref.watch(audioControllerProvider).isLoading ? 0 : 68,
+        ),
+        child: child,
+      ),
       bottomNavigationBar: NavigationBar(
         selectedIndex: ref.watch(rootControllerProvider).index,
         onDestinationSelected: (index) {
@@ -34,12 +41,9 @@ class RootPage extends ConsumerWidget {
             icon: const Icon(FontAwesomeIcons.recordVinyl),
             label: l10n.rootSOV,
           ),
-          NavigationDestination(
-            icon: const Icon(FontAwesomeIcons.headphones),
-            label: l10n.rootListen,
-          ),
         ],
       ),
+      bottomSheet: const MusicPlayer(),
     );
   }
 }

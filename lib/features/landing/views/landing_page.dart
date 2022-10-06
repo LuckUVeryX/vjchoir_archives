@@ -20,8 +20,10 @@ class LandingPage extends ConsumerWidget {
               bodyAlignment: Alignment.center,
             ),
             body: l10n.landingBodyVjchoir,
-            titleWidget: Assets.logos.vjchoir
-                .svg(width: context.mediaQuerySize.width * 3 / 4),
+            titleWidget: Assets.logos.vjchoir.svg(
+              width: context.mediaQuerySize.width * 3 / 4,
+              color: context.colorScheme.onBackground,
+            ),
           ),
           PageViewModel(
             title: l10n.landingTitleBatches,
@@ -64,7 +66,7 @@ class _PageImage extends StatelessWidget {
     return Center(
       child: Icon(
         iconData,
-        color: context.theme.primaryColor,
+        color: context.colorScheme.onBackground,
         size: 60,
       ),
     );

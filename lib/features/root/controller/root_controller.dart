@@ -5,7 +5,7 @@ final rootControllerProvider = StateProvider<RootPageTab>((ref) {
   return RootPageTab.sov;
 });
 
-enum RootPageTab { batches, sov, listen }
+enum RootPageTab { batches, sov }
 
 extension RootPageTabX on RootPageTab {
   String get path {
@@ -14,8 +14,6 @@ extension RootPageTabX on RootPageTab {
         return Routes.batches;
       case RootPageTab.sov:
         return Routes.sov;
-      case RootPageTab.listen:
-        return Routes.listen;
     }
   }
 }

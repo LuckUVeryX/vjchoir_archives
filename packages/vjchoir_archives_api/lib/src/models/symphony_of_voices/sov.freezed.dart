@@ -239,11 +239,6 @@ class _$_Sov implements _Sov {
   final SovLinks links;
 
   @override
-  String toString() {
-    return 'Sov(id: $id, title: $title, abbr: $abbr, info: $info, intro: $intro, artwork: $artwork, repertoire: $repertoire, links: $links)';
-  }
-
-  @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&

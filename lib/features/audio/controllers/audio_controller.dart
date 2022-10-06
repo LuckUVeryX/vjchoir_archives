@@ -89,8 +89,22 @@ class AudioController extends StateNotifier<AsyncValue<AudioState>> {
   }
 
   Future<void> pause() => _repo.pause();
-  Future<void> seekToNext() => _repo.seekToNext();
-  Future<void> seekToPrevious() => _repo.seekToPrevious();
+  Future<void> seekToNext() async {
+    await _repo.seekToNext();
+    await _playIfPaused();
+  }
+
+  Future<void> seekToPrevious() async {
+    await _repo.seekToPrevious();
+    await _playIfPaused();
+  }
+
+  Future<void> _playIfPaused() async {
+    if (state.valueOrNull?.audioModel.whenOrNull(playing: () => false) ??
+        true) {
+      await _repo.play();
+    }
+  }
 
   void _parseAudioStream(AudioModel audio) {
     state = state.whenData((value) => value.copyWith(audioModel: audio));

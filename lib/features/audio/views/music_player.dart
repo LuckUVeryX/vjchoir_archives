@@ -2,8 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:vjchoir_archives/features/audio/controllers/controllers.dart';
-import 'package:vjchoir_archives/features/audio/models/models.dart';
+import 'package:vjchoir_archives/features/audio/audio.dart';
 import 'package:vjchoir_archives/utils/utils.dart';
 
 class MusicPlayer extends ConsumerWidget {
@@ -17,16 +16,23 @@ class MusicPlayer extends ConsumerWidget {
 
     return state.showWhen(
       data: (data) {
+        final palette = ref
+            .watch(
+              paletteGeneratorProvider(NetworkImage(data.playlist.artwork)),
+            )
+            .whenOrNull(
+              data: (data) => data.mutedColor,
+            );
+
         return Card(
-          // TODO(Ryan): Use color of album to generate player color
           margin: EdgeInsets.zero,
-          color: context.colorScheme.primary,
+          color: palette?.color,
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
               ListTile(
                 dense: true,
-                textColor: context.colorScheme.onPrimary,
+                textColor: palette?.titleTextColor,
                 leading: ClipRRect(
                   borderRadius: BorderRadius.circular(4),
                   child: SizedBox.square(
@@ -67,6 +73,14 @@ class _MusicControls extends ConsumerWidget {
     final state = ref.watch(audioControllerProvider);
     return state.showWhen(
       data: (data) {
+        final palette = ref
+            .watch(
+              paletteGeneratorProvider(NetworkImage(data.playlist.artwork)),
+            )
+            .whenOrNull(
+              data: (data) => data.mutedColor,
+            );
+
         final isPlaying = data.audioModel.maybeWhen(
           orElse: () => false,
           playing: () => true,
@@ -78,7 +92,7 @@ class _MusicControls extends ConsumerWidget {
                   ref.read(audioControllerProvider.notifier).seekToPrevious,
               icon: Icon(
                 FontAwesomeIcons.backward,
-                color: context.colorScheme.onPrimary,
+                color: palette?.titleTextColor,
               ),
             ),
             IconButton(
@@ -93,12 +107,12 @@ class _MusicControls extends ConsumerWidget {
                 loading: () => SizedBox.square(
                   dimension: 24,
                   child: CircularProgressIndicator(
-                    color: context.colorScheme.onPrimary,
+                    color: palette?.titleTextColor,
                   ),
                 ),
                 orElse: () => Icon(
                   isPlaying ? FontAwesomeIcons.pause : FontAwesomeIcons.play,
-                  color: context.colorScheme.onPrimary,
+                  color: palette?.titleTextColor,
                 ),
               ),
             ),
@@ -106,7 +120,7 @@ class _MusicControls extends ConsumerWidget {
               onPressed: ref.read(audioControllerProvider.notifier).seekToNext,
               icon: Icon(
                 FontAwesomeIcons.forward,
-                color: context.colorScheme.onPrimary,
+                color: palette?.titleTextColor,
               ),
             ),
           ],

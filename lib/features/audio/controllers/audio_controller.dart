@@ -78,7 +78,9 @@ class AudioController extends StateNotifier<AsyncValue<AudioState>> {
         await value.audioModel.whenOrNull(
           paused: _repo.play,
           replay: () async {
-            await _repo.seek(Duration.zero);
+            await _repo.setPlaylist(
+              playlist: value.playlist.copyWith(index: 0),
+            );
             await _repo.play();
           },
         );

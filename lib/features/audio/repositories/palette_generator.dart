@@ -4,8 +4,9 @@ import 'package:palette_generator/palette_generator.dart';
 
 export 'package:palette_generator/palette_generator.dart';
 
-final paletteGeneratorProvider = FutureProvider.autoDispose
-    .family<PaletteGenerator, ImageProvider>((ref, imageProvider) async {
+final paletteGeneratorProvider =
+    FutureProvider.family<PaletteGenerator, ImageProvider>(
+        (ref, imageProvider) {
   return _colorsFromImage(imageProvider);
 });
 

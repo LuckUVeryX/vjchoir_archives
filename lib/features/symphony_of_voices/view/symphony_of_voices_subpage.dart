@@ -3,6 +3,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:vjchoir_archives/features/audio/audio.dart';
 import 'package:vjchoir_archives/features/symphony_of_voices/controllers/controllers.dart';
 import 'package:vjchoir_archives/features/symphony_of_voices/models/models.dart';
 import 'package:vjchoir_archives/l10n/l10n.dart';
@@ -71,12 +72,22 @@ class _SymphonyOfVoicesSubPageView extends StatelessWidget {
             childCount: sov.repertoire.length,
             (context, index) {
               final repertoire = sov.repertoire[index];
-              return ListTile(
-                onTap: () {
-                  // TODO(Ryan): Play music
+              return Consumer(
+                builder: (context, ref, child) {
+                  return ListTile(
+                    onTap: () {
+                      ref.read(audioControllerProvider.notifier).play(
+                            title: repertoire.name,
+                            composer: repertoire.composer,
+                            artwork: sov.artwork,
+                            url: repertoire.mp3,
+                          );
+                    },
+                    title: Text(repertoire.name),
+                    subtitle:
+                        Text(l10n.sovRepertoireComposer(repertoire.composer)),
+                  );
                 },
-                title: Text(repertoire.name),
-                subtitle: Text(l10n.sovRepertoireComposer(repertoire.composer)),
               );
             },
           ),

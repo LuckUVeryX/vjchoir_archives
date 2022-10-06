@@ -20,7 +20,7 @@ class RootPage extends ConsumerWidget {
     return Scaffold(
       body: Padding(
         // Account space for music player
-        padding: const EdgeInsets.only(bottom: 64),
+        padding: const EdgeInsets.only(bottom: 68),
         child: child,
       ),
       bottomNavigationBar: NavigationBar(

@@ -1,5 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:vjchoir_archives/features/audio/models/models.dart';
+import 'package:vjchoir_archives_repository/vjchoir_archives_repository.dart';
 
 part 'audio_state.freezed.dart';
 
@@ -8,16 +9,12 @@ class AudioState with _$AudioState {
   const factory AudioState({
     required AudioModel audioModel,
     required AudioPositionModel audioPosition,
-    required String? title,
-    required String? composer,
-    required String? artwork,
+    required Playlist playlist,
   }) = _AudioState;
 
-  factory AudioState.initial() => AudioState(
+  factory AudioState.fromSov(Sov sov) => AudioState(
         audioModel: const AudioModel.loading(),
         audioPosition: AudioPositionModel.initial(),
-        title: null,
-        composer: null,
-        artwork: null,
+        playlist: Playlist.fromSov(sov),
       );
 }

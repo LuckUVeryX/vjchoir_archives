@@ -18,9 +18,7 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$AudioState {
   AudioModel get audioModel => throw _privateConstructorUsedError;
   AudioPositionModel get audioPosition => throw _privateConstructorUsedError;
-  String? get title => throw _privateConstructorUsedError;
-  String? get composer => throw _privateConstructorUsedError;
-  String? get artwork => throw _privateConstructorUsedError;
+  Playlist get playlist => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $AudioStateCopyWith<AudioState> get copyWith =>
@@ -35,12 +33,11 @@ abstract class $AudioStateCopyWith<$Res> {
   $Res call(
       {AudioModel audioModel,
       AudioPositionModel audioPosition,
-      String? title,
-      String? composer,
-      String? artwork});
+      Playlist playlist});
 
   $AudioModelCopyWith<$Res> get audioModel;
   $AudioPositionModelCopyWith<$Res> get audioPosition;
+  $PlaylistCopyWith<$Res> get playlist;
 }
 
 /// @nodoc
@@ -55,9 +52,7 @@ class _$AudioStateCopyWithImpl<$Res> implements $AudioStateCopyWith<$Res> {
   $Res call({
     Object? audioModel = freezed,
     Object? audioPosition = freezed,
-    Object? title = freezed,
-    Object? composer = freezed,
-    Object? artwork = freezed,
+    Object? playlist = freezed,
   }) {
     return _then(_value.copyWith(
       audioModel: audioModel == freezed
@@ -68,18 +63,10 @@ class _$AudioStateCopyWithImpl<$Res> implements $AudioStateCopyWith<$Res> {
           ? _value.audioPosition
           : audioPosition // ignore: cast_nullable_to_non_nullable
               as AudioPositionModel,
-      title: title == freezed
-          ? _value.title
-          : title // ignore: cast_nullable_to_non_nullable
-              as String?,
-      composer: composer == freezed
-          ? _value.composer
-          : composer // ignore: cast_nullable_to_non_nullable
-              as String?,
-      artwork: artwork == freezed
-          ? _value.artwork
-          : artwork // ignore: cast_nullable_to_non_nullable
-              as String?,
+      playlist: playlist == freezed
+          ? _value.playlist
+          : playlist // ignore: cast_nullable_to_non_nullable
+              as Playlist,
     ));
   }
 
@@ -96,6 +83,13 @@ class _$AudioStateCopyWithImpl<$Res> implements $AudioStateCopyWith<$Res> {
       return _then(_value.copyWith(audioPosition: value));
     });
   }
+
+  @override
+  $PlaylistCopyWith<$Res> get playlist {
+    return $PlaylistCopyWith<$Res>(_value.playlist, (value) {
+      return _then(_value.copyWith(playlist: value));
+    });
+  }
 }
 
 /// @nodoc
@@ -108,14 +102,14 @@ abstract class _$$_AudioStateCopyWith<$Res>
   $Res call(
       {AudioModel audioModel,
       AudioPositionModel audioPosition,
-      String? title,
-      String? composer,
-      String? artwork});
+      Playlist playlist});
 
   @override
   $AudioModelCopyWith<$Res> get audioModel;
   @override
   $AudioPositionModelCopyWith<$Res> get audioPosition;
+  @override
+  $PlaylistCopyWith<$Res> get playlist;
 }
 
 /// @nodoc
@@ -132,9 +126,7 @@ class __$$_AudioStateCopyWithImpl<$Res> extends _$AudioStateCopyWithImpl<$Res>
   $Res call({
     Object? audioModel = freezed,
     Object? audioPosition = freezed,
-    Object? title = freezed,
-    Object? composer = freezed,
-    Object? artwork = freezed,
+    Object? playlist = freezed,
   }) {
     return _then(_$_AudioState(
       audioModel: audioModel == freezed
@@ -145,18 +137,10 @@ class __$$_AudioStateCopyWithImpl<$Res> extends _$AudioStateCopyWithImpl<$Res>
           ? _value.audioPosition
           : audioPosition // ignore: cast_nullable_to_non_nullable
               as AudioPositionModel,
-      title: title == freezed
-          ? _value.title
-          : title // ignore: cast_nullable_to_non_nullable
-              as String?,
-      composer: composer == freezed
-          ? _value.composer
-          : composer // ignore: cast_nullable_to_non_nullable
-              as String?,
-      artwork: artwork == freezed
-          ? _value.artwork
-          : artwork // ignore: cast_nullable_to_non_nullable
-              as String?,
+      playlist: playlist == freezed
+          ? _value.playlist
+          : playlist // ignore: cast_nullable_to_non_nullable
+              as Playlist,
     ));
   }
 }
@@ -167,24 +151,18 @@ class _$_AudioState implements _AudioState {
   const _$_AudioState(
       {required this.audioModel,
       required this.audioPosition,
-      required this.title,
-      required this.composer,
-      required this.artwork});
+      required this.playlist});
 
   @override
   final AudioModel audioModel;
   @override
   final AudioPositionModel audioPosition;
   @override
-  final String? title;
-  @override
-  final String? composer;
-  @override
-  final String? artwork;
+  final Playlist playlist;
 
   @override
   String toString() {
-    return 'AudioState(audioModel: $audioModel, audioPosition: $audioPosition, title: $title, composer: $composer, artwork: $artwork)';
+    return 'AudioState(audioModel: $audioModel, audioPosition: $audioPosition, playlist: $playlist)';
   }
 
   @override
@@ -196,9 +174,7 @@ class _$_AudioState implements _AudioState {
                 .equals(other.audioModel, audioModel) &&
             const DeepCollectionEquality()
                 .equals(other.audioPosition, audioPosition) &&
-            const DeepCollectionEquality().equals(other.title, title) &&
-            const DeepCollectionEquality().equals(other.composer, composer) &&
-            const DeepCollectionEquality().equals(other.artwork, artwork));
+            const DeepCollectionEquality().equals(other.playlist, playlist));
   }
 
   @override
@@ -206,9 +182,7 @@ class _$_AudioState implements _AudioState {
       runtimeType,
       const DeepCollectionEquality().hash(audioModel),
       const DeepCollectionEquality().hash(audioPosition),
-      const DeepCollectionEquality().hash(title),
-      const DeepCollectionEquality().hash(composer),
-      const DeepCollectionEquality().hash(artwork));
+      const DeepCollectionEquality().hash(playlist));
 
   @JsonKey(ignore: true)
   @override
@@ -220,20 +194,14 @@ abstract class _AudioState implements AudioState {
   const factory _AudioState(
       {required final AudioModel audioModel,
       required final AudioPositionModel audioPosition,
-      required final String? title,
-      required final String? composer,
-      required final String? artwork}) = _$_AudioState;
+      required final Playlist playlist}) = _$_AudioState;
 
   @override
   AudioModel get audioModel;
   @override
   AudioPositionModel get audioPosition;
   @override
-  String? get title;
-  @override
-  String? get composer;
-  @override
-  String? get artwork;
+  Playlist get playlist;
   @override
   @JsonKey(ignore: true)
   _$$_AudioStateCopyWith<_$_AudioState> get copyWith =>

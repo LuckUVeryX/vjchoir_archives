@@ -77,10 +77,8 @@ class _SymphonyOfVoicesSubPageView extends StatelessWidget {
                   return ListTile(
                     onTap: () {
                       ref.read(audioControllerProvider.notifier).play(
-                            title: repertoire.name,
-                            composer: repertoire.composer,
-                            artwork: sov.artwork,
-                            url: repertoire.mp3,
+                            sov: sov,
+                            index: index,
                           );
                     },
                     title: Text(repertoire.name),

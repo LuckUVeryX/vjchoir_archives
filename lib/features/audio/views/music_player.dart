@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:vjchoir_archives/features/audio/controllers/controllers.dart';
+import 'package:vjchoir_archives/features/audio/models/models.dart';
 import 'package:vjchoir_archives/utils/utils.dart';
 
 class MusicPlayer extends ConsumerWidget {
@@ -31,19 +32,18 @@ class MusicPlayer extends ConsumerWidget {
                   child: SizedBox.square(
                     dimension: 48,
                     child: CachedNetworkImage(
-                      imageUrl: data.artwork ??
-                          'https://i.scdn.co/image/ab67616d0000b2738c0defcb336a0296eb7d704a',
+                      imageUrl: data.playlist.artwork,
                       fit: BoxFit.contain,
                     ),
                   ),
                 ),
                 title: Text(
-                  data.title ?? 'GANADARA (Feat. IU)',
+                  data.playlist.currRepertoire.name,
                   maxLines: 1,
                 ),
                 subtitle: Text(
                   maxLines: 1,
-                  data.composer ?? 'Jay Park, IU',
+                  data.playlist.currRepertoire.composer,
                 ),
                 trailing: const _MusicControls(),
               ),
@@ -75,7 +75,8 @@ class _MusicControls extends ConsumerWidget {
             return Wrap(
               children: [
                 IconButton(
-                  onPressed: () {},
+                  onPressed:
+                      ref.read(audioControllerProvider.notifier).seekToPrevious,
                   icon: Icon(
                     FontAwesomeIcons.backward,
                     color: context.colorScheme.onPrimary,
@@ -92,7 +93,8 @@ class _MusicControls extends ConsumerWidget {
                   ),
                 ),
                 IconButton(
-                  onPressed: () {},
+                  onPressed:
+                      ref.read(audioControllerProvider.notifier).seekToNext,
                   icon: Icon(
                     FontAwesomeIcons.forward,
                     color: context.colorScheme.onPrimary,

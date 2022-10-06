@@ -51,8 +51,7 @@ class AudioController extends StateNotifier<AsyncValue<AudioState>> {
     state = AsyncData(AudioState.fromSov(sov.sov[0]));
     state.whenData((value) async {
       await _repo.setPlaylist(
-        urls: value.playlist.repertoires.map((e) => e.mp3).toList(),
-        initialIndex: value.playlist.index,
+        playlist: value.playlist,
       );
     });
   }
@@ -68,10 +67,7 @@ class AudioController extends StateNotifier<AsyncValue<AudioState>> {
     );
 
     state.whenData((value) async {
-      await _repo.setPlaylist(
-        urls: value.playlist.repertoires.map((e) => e.mp3).toList(),
-        initialIndex: value.playlist.index,
-      );
+      await _repo.setPlaylist(playlist: value.playlist);
       await _repo.play();
     });
   }

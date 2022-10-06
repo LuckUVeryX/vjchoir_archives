@@ -67,42 +67,49 @@ class _MusicControls extends ConsumerWidget {
     final state = ref.watch(audioControllerProvider);
     return state.showWhen(
       data: (data) {
-        return data.audioModel.maybeWhen(
-          loading: CircularProgressIndicator.adaptive,
-          orElse: () {
-            final isPlaying =
-                data.audioModel.whenOrNull(playing: () => true) ?? false;
-            return Wrap(
-              children: [
-                IconButton(
-                  onPressed:
-                      ref.read(audioControllerProvider.notifier).seekToPrevious,
-                  icon: Icon(
-                    FontAwesomeIcons.backward,
+        final isPlaying = data.audioModel.maybeWhen(
+          orElse: () => false,
+          playing: () => true,
+        );
+        return Wrap(
+          children: [
+            IconButton(
+              onPressed:
+                  ref.read(audioControllerProvider.notifier).seekToPrevious,
+              icon: Icon(
+                FontAwesomeIcons.backward,
+                color: context.colorScheme.onPrimary,
+              ),
+            ),
+            IconButton(
+              onPressed: data.audioModel.maybeWhen(
+                loading: () => null,
+                orElse: () => () {
+                  final notifier = ref.read(audioControllerProvider.notifier);
+                  isPlaying ? notifier.pause() : notifier.resume();
+                },
+              ),
+              icon: data.audioModel.maybeWhen(
+                loading: () => SizedBox.square(
+                  dimension: 24,
+                  child: CircularProgressIndicator(
                     color: context.colorScheme.onPrimary,
                   ),
                 ),
-                IconButton(
-                  onPressed: () {
-                    final notifier = ref.read(audioControllerProvider.notifier);
-                    isPlaying ? notifier.pause() : notifier.resume();
-                  },
-                  icon: Icon(
-                    isPlaying ? FontAwesomeIcons.pause : FontAwesomeIcons.play,
-                    color: context.colorScheme.onPrimary,
-                  ),
+                orElse: () => Icon(
+                  isPlaying ? FontAwesomeIcons.pause : FontAwesomeIcons.play,
+                  color: context.colorScheme.onPrimary,
                 ),
-                IconButton(
-                  onPressed:
-                      ref.read(audioControllerProvider.notifier).seekToNext,
-                  icon: Icon(
-                    FontAwesomeIcons.forward,
-                    color: context.colorScheme.onPrimary,
-                  ),
-                ),
-              ],
-            );
-          },
+              ),
+            ),
+            IconButton(
+              onPressed: ref.read(audioControllerProvider.notifier).seekToNext,
+              icon: Icon(
+                FontAwesomeIcons.forward,
+                color: context.colorScheme.onPrimary,
+              ),
+            ),
+          ],
         );
       },
     );

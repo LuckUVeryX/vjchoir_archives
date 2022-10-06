@@ -13,7 +13,7 @@ class MusicPlayer extends StatelessWidget {
     return Card(
       // TODO(Ryan): Use color of album to generate player color
       color: context.colorScheme.primary,
-      margin: const EdgeInsets.fromLTRB(4, 0, 4, 4),
+      margin: EdgeInsets.zero,
       child: ListTile(
         dense: true,
         textColor: context.colorScheme.onPrimary,

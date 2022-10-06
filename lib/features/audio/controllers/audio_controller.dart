@@ -35,17 +35,20 @@ class AudioController extends StateNotifier<AudioState> {
     await _repo.play();
   }
 
-  Future<void> resume() => _repo.play();
+  Future<void> resume() async {
+    await state.audioModel.whenOrNull(
+      paused: _repo.play,
+      replay: () async {
+        await _repo.seek(Duration.zero);
+        await _repo.play();
+      },
+    );
+  }
+
   Future<void> pause() => _repo.pause();
 
   void _parseAudioStream(AudioModel audio) {
-    audio.map<void>(
-      loading: (value) => state = state.copyWith(isLoading: true),
-      paused: (value) =>
-          state = state.copyWith(isPlaying: false, isLoading: false),
-      playing: (value) =>
-          state = state.copyWith(isPlaying: true, isLoading: false),
-    );
+    state = state.copyWith(audioModel: audio);
   }
 
   void _parsePositionStream(AudioPositionModel position) {

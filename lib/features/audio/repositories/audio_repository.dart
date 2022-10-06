@@ -50,10 +50,12 @@ class AudioRepository {
       return const AudioModel.loading();
     }
 
-    if (!isPlaying || processingState == ProcessingState.completed) {
+    if (!isPlaying) {
       return const AudioModel.paused();
-    } else {
+    } else if (processingState != ProcessingState.completed) {
       return const AudioModel.playing();
+    } else {
+      return const AudioModel.replay();
     }
   }
 }

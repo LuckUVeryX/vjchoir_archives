@@ -21,6 +21,7 @@ mixin _$AudioModel {
     required TResult Function() loading,
     required TResult Function() paused,
     required TResult Function() playing,
+    required TResult Function() replay,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -28,6 +29,7 @@ mixin _$AudioModel {
     TResult Function()? loading,
     TResult Function()? paused,
     TResult Function()? playing,
+    TResult Function()? replay,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -35,6 +37,7 @@ mixin _$AudioModel {
     TResult Function()? loading,
     TResult Function()? paused,
     TResult Function()? playing,
+    TResult Function()? replay,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -43,6 +46,7 @@ mixin _$AudioModel {
     required TResult Function(_Loading value) loading,
     required TResult Function(_Paused value) paused,
     required TResult Function(_Playing value) playing,
+    required TResult Function(_Replay value) replay,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -50,6 +54,7 @@ mixin _$AudioModel {
     TResult Function(_Loading value)? loading,
     TResult Function(_Paused value)? paused,
     TResult Function(_Playing value)? playing,
+    TResult Function(_Replay value)? replay,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -57,6 +62,7 @@ mixin _$AudioModel {
     TResult Function(_Loading value)? loading,
     TResult Function(_Paused value)? paused,
     TResult Function(_Playing value)? playing,
+    TResult Function(_Replay value)? replay,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -120,6 +126,7 @@ class _$_Loading implements _Loading {
     required TResult Function() loading,
     required TResult Function() paused,
     required TResult Function() playing,
+    required TResult Function() replay,
   }) {
     return loading();
   }
@@ -130,6 +137,7 @@ class _$_Loading implements _Loading {
     TResult Function()? loading,
     TResult Function()? paused,
     TResult Function()? playing,
+    TResult Function()? replay,
   }) {
     return loading?.call();
   }
@@ -140,6 +148,7 @@ class _$_Loading implements _Loading {
     TResult Function()? loading,
     TResult Function()? paused,
     TResult Function()? playing,
+    TResult Function()? replay,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -154,6 +163,7 @@ class _$_Loading implements _Loading {
     required TResult Function(_Loading value) loading,
     required TResult Function(_Paused value) paused,
     required TResult Function(_Playing value) playing,
+    required TResult Function(_Replay value) replay,
   }) {
     return loading(this);
   }
@@ -164,6 +174,7 @@ class _$_Loading implements _Loading {
     TResult Function(_Loading value)? loading,
     TResult Function(_Paused value)? paused,
     TResult Function(_Playing value)? playing,
+    TResult Function(_Replay value)? replay,
   }) {
     return loading?.call(this);
   }
@@ -174,6 +185,7 @@ class _$_Loading implements _Loading {
     TResult Function(_Loading value)? loading,
     TResult Function(_Paused value)? paused,
     TResult Function(_Playing value)? playing,
+    TResult Function(_Replay value)? replay,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -228,6 +240,7 @@ class _$_Paused implements _Paused {
     required TResult Function() loading,
     required TResult Function() paused,
     required TResult Function() playing,
+    required TResult Function() replay,
   }) {
     return paused();
   }
@@ -238,6 +251,7 @@ class _$_Paused implements _Paused {
     TResult Function()? loading,
     TResult Function()? paused,
     TResult Function()? playing,
+    TResult Function()? replay,
   }) {
     return paused?.call();
   }
@@ -248,6 +262,7 @@ class _$_Paused implements _Paused {
     TResult Function()? loading,
     TResult Function()? paused,
     TResult Function()? playing,
+    TResult Function()? replay,
     required TResult orElse(),
   }) {
     if (paused != null) {
@@ -262,6 +277,7 @@ class _$_Paused implements _Paused {
     required TResult Function(_Loading value) loading,
     required TResult Function(_Paused value) paused,
     required TResult Function(_Playing value) playing,
+    required TResult Function(_Replay value) replay,
   }) {
     return paused(this);
   }
@@ -272,6 +288,7 @@ class _$_Paused implements _Paused {
     TResult Function(_Loading value)? loading,
     TResult Function(_Paused value)? paused,
     TResult Function(_Playing value)? playing,
+    TResult Function(_Replay value)? replay,
   }) {
     return paused?.call(this);
   }
@@ -282,6 +299,7 @@ class _$_Paused implements _Paused {
     TResult Function(_Loading value)? loading,
     TResult Function(_Paused value)? paused,
     TResult Function(_Playing value)? playing,
+    TResult Function(_Replay value)? replay,
     required TResult orElse(),
   }) {
     if (paused != null) {
@@ -337,6 +355,7 @@ class _$_Playing implements _Playing {
     required TResult Function() loading,
     required TResult Function() paused,
     required TResult Function() playing,
+    required TResult Function() replay,
   }) {
     return playing();
   }
@@ -347,6 +366,7 @@ class _$_Playing implements _Playing {
     TResult Function()? loading,
     TResult Function()? paused,
     TResult Function()? playing,
+    TResult Function()? replay,
   }) {
     return playing?.call();
   }
@@ -357,6 +377,7 @@ class _$_Playing implements _Playing {
     TResult Function()? loading,
     TResult Function()? paused,
     TResult Function()? playing,
+    TResult Function()? replay,
     required TResult orElse(),
   }) {
     if (playing != null) {
@@ -371,6 +392,7 @@ class _$_Playing implements _Playing {
     required TResult Function(_Loading value) loading,
     required TResult Function(_Paused value) paused,
     required TResult Function(_Playing value) playing,
+    required TResult Function(_Replay value) replay,
   }) {
     return playing(this);
   }
@@ -381,6 +403,7 @@ class _$_Playing implements _Playing {
     TResult Function(_Loading value)? loading,
     TResult Function(_Paused value)? paused,
     TResult Function(_Playing value)? playing,
+    TResult Function(_Replay value)? replay,
   }) {
     return playing?.call(this);
   }
@@ -391,6 +414,7 @@ class _$_Playing implements _Playing {
     TResult Function(_Loading value)? loading,
     TResult Function(_Paused value)? paused,
     TResult Function(_Playing value)? playing,
+    TResult Function(_Replay value)? replay,
     required TResult orElse(),
   }) {
     if (playing != null) {
@@ -402,4 +426,118 @@ class _$_Playing implements _Playing {
 
 abstract class _Playing implements AudioModel {
   const factory _Playing() = _$_Playing;
+}
+
+/// @nodoc
+abstract class _$$_ReplayCopyWith<$Res> {
+  factory _$$_ReplayCopyWith(_$_Replay value, $Res Function(_$_Replay) then) =
+      __$$_ReplayCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$_ReplayCopyWithImpl<$Res> extends _$AudioModelCopyWithImpl<$Res>
+    implements _$$_ReplayCopyWith<$Res> {
+  __$$_ReplayCopyWithImpl(_$_Replay _value, $Res Function(_$_Replay) _then)
+      : super(_value, (v) => _then(v as _$_Replay));
+
+  @override
+  _$_Replay get _value => super._value as _$_Replay;
+}
+
+/// @nodoc
+
+class _$_Replay implements _Replay {
+  const _$_Replay();
+
+  @override
+  String toString() {
+    return 'AudioModel.replay()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$_Replay);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() loading,
+    required TResult Function() paused,
+    required TResult Function() playing,
+    required TResult Function() replay,
+  }) {
+    return replay();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? loading,
+    TResult Function()? paused,
+    TResult Function()? playing,
+    TResult Function()? replay,
+  }) {
+    return replay?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? loading,
+    TResult Function()? paused,
+    TResult Function()? playing,
+    TResult Function()? replay,
+    required TResult orElse(),
+  }) {
+    if (replay != null) {
+      return replay();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Loading value) loading,
+    required TResult Function(_Paused value) paused,
+    required TResult Function(_Playing value) playing,
+    required TResult Function(_Replay value) replay,
+  }) {
+    return replay(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(_Loading value)? loading,
+    TResult Function(_Paused value)? paused,
+    TResult Function(_Playing value)? playing,
+    TResult Function(_Replay value)? replay,
+  }) {
+    return replay?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Loading value)? loading,
+    TResult Function(_Paused value)? paused,
+    TResult Function(_Playing value)? playing,
+    TResult Function(_Replay value)? replay,
+    required TResult orElse(),
+  }) {
+    if (replay != null) {
+      return replay(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _Replay implements AudioModel {
+  const factory _Replay() = _$_Replay;
 }

@@ -62,39 +62,40 @@ class _MusicControls extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final state = ref.watch(audioControllerProvider);
 
-    if (state.isLoading) {
-      return CircularProgressIndicator.adaptive(
-        backgroundColor: context.colorScheme.onPrimary,
-      );
-    }
-
-    return Wrap(
-      children: [
-        IconButton(
-          onPressed: () {},
-          icon: Icon(
-            FontAwesomeIcons.backward,
-            color: context.colorScheme.onPrimary,
-          ),
-        ),
-        IconButton(
-          onPressed: () {
-            final notifier = ref.read(audioControllerProvider.notifier);
-            state.isPlaying ? notifier.pause() : notifier.resume();
-          },
-          icon: Icon(
-            state.isPlaying ? FontAwesomeIcons.pause : FontAwesomeIcons.play,
-            color: context.colorScheme.onPrimary,
-          ),
-        ),
-        IconButton(
-          onPressed: () {},
-          icon: Icon(
-            FontAwesomeIcons.forward,
-            color: context.colorScheme.onPrimary,
-          ),
-        ),
-      ],
+    return state.audioModel.maybeWhen(
+      loading: CircularProgressIndicator.adaptive,
+      orElse: () {
+        final isPlaying =
+            state.audioModel.whenOrNull(playing: () => true) ?? false;
+        return Wrap(
+          children: [
+            IconButton(
+              onPressed: () {},
+              icon: Icon(
+                FontAwesomeIcons.backward,
+                color: context.colorScheme.onPrimary,
+              ),
+            ),
+            IconButton(
+              onPressed: () {
+                final notifier = ref.read(audioControllerProvider.notifier);
+                isPlaying ? notifier.pause() : notifier.resume();
+              },
+              icon: Icon(
+                isPlaying ? FontAwesomeIcons.pause : FontAwesomeIcons.play,
+                color: context.colorScheme.onPrimary,
+              ),
+            ),
+            IconButton(
+              onPressed: () {},
+              icon: Icon(
+                FontAwesomeIcons.forward,
+                color: context.colorScheme.onPrimary,
+              ),
+            ),
+          ],
+        );
+      },
     );
   }
 }

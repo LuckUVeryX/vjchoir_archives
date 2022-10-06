@@ -6,8 +6,7 @@ part 'audio_state.freezed.dart';
 @freezed
 class AudioState with _$AudioState {
   const factory AudioState({
-    required bool isPlaying,
-    required bool isLoading,
+    required AudioModel audioModel,
     required AudioPositionModel audioPosition,
     required String? title,
     required String? composer,
@@ -15,8 +14,7 @@ class AudioState with _$AudioState {
   }) = _AudioState;
 
   factory AudioState.initial() => AudioState(
-        isPlaying: false,
-        isLoading: false,
+        audioModel: const AudioModel.loading(),
         audioPosition: AudioPositionModel.initial(),
         title: null,
         composer: null,

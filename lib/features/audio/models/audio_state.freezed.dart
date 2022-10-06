@@ -16,8 +16,7 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$AudioState {
-  bool get isPlaying => throw _privateConstructorUsedError;
-  bool get isLoading => throw _privateConstructorUsedError;
+  AudioModel get audioModel => throw _privateConstructorUsedError;
   AudioPositionModel get audioPosition => throw _privateConstructorUsedError;
   String? get title => throw _privateConstructorUsedError;
   String? get composer => throw _privateConstructorUsedError;
@@ -34,13 +33,13 @@ abstract class $AudioStateCopyWith<$Res> {
           AudioState value, $Res Function(AudioState) then) =
       _$AudioStateCopyWithImpl<$Res>;
   $Res call(
-      {bool isPlaying,
-      bool isLoading,
+      {AudioModel audioModel,
       AudioPositionModel audioPosition,
       String? title,
       String? composer,
       String? artwork});
 
+  $AudioModelCopyWith<$Res> get audioModel;
   $AudioPositionModelCopyWith<$Res> get audioPosition;
 }
 
@@ -54,22 +53,17 @@ class _$AudioStateCopyWithImpl<$Res> implements $AudioStateCopyWith<$Res> {
 
   @override
   $Res call({
-    Object? isPlaying = freezed,
-    Object? isLoading = freezed,
+    Object? audioModel = freezed,
     Object? audioPosition = freezed,
     Object? title = freezed,
     Object? composer = freezed,
     Object? artwork = freezed,
   }) {
     return _then(_value.copyWith(
-      isPlaying: isPlaying == freezed
-          ? _value.isPlaying
-          : isPlaying // ignore: cast_nullable_to_non_nullable
-              as bool,
-      isLoading: isLoading == freezed
-          ? _value.isLoading
-          : isLoading // ignore: cast_nullable_to_non_nullable
-              as bool,
+      audioModel: audioModel == freezed
+          ? _value.audioModel
+          : audioModel // ignore: cast_nullable_to_non_nullable
+              as AudioModel,
       audioPosition: audioPosition == freezed
           ? _value.audioPosition
           : audioPosition // ignore: cast_nullable_to_non_nullable
@@ -90,6 +84,13 @@ class _$AudioStateCopyWithImpl<$Res> implements $AudioStateCopyWith<$Res> {
   }
 
   @override
+  $AudioModelCopyWith<$Res> get audioModel {
+    return $AudioModelCopyWith<$Res>(_value.audioModel, (value) {
+      return _then(_value.copyWith(audioModel: value));
+    });
+  }
+
+  @override
   $AudioPositionModelCopyWith<$Res> get audioPosition {
     return $AudioPositionModelCopyWith<$Res>(_value.audioPosition, (value) {
       return _then(_value.copyWith(audioPosition: value));
@@ -105,13 +106,14 @@ abstract class _$$_AudioStateCopyWith<$Res>
       __$$_AudioStateCopyWithImpl<$Res>;
   @override
   $Res call(
-      {bool isPlaying,
-      bool isLoading,
+      {AudioModel audioModel,
       AudioPositionModel audioPosition,
       String? title,
       String? composer,
       String? artwork});
 
+  @override
+  $AudioModelCopyWith<$Res> get audioModel;
   @override
   $AudioPositionModelCopyWith<$Res> get audioPosition;
 }
@@ -128,22 +130,17 @@ class __$$_AudioStateCopyWithImpl<$Res> extends _$AudioStateCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object? isPlaying = freezed,
-    Object? isLoading = freezed,
+    Object? audioModel = freezed,
     Object? audioPosition = freezed,
     Object? title = freezed,
     Object? composer = freezed,
     Object? artwork = freezed,
   }) {
     return _then(_$_AudioState(
-      isPlaying: isPlaying == freezed
-          ? _value.isPlaying
-          : isPlaying // ignore: cast_nullable_to_non_nullable
-              as bool,
-      isLoading: isLoading == freezed
-          ? _value.isLoading
-          : isLoading // ignore: cast_nullable_to_non_nullable
-              as bool,
+      audioModel: audioModel == freezed
+          ? _value.audioModel
+          : audioModel // ignore: cast_nullable_to_non_nullable
+              as AudioModel,
       audioPosition: audioPosition == freezed
           ? _value.audioPosition
           : audioPosition // ignore: cast_nullable_to_non_nullable
@@ -168,17 +165,14 @@ class __$$_AudioStateCopyWithImpl<$Res> extends _$AudioStateCopyWithImpl<$Res>
 
 class _$_AudioState implements _AudioState {
   const _$_AudioState(
-      {required this.isPlaying,
-      required this.isLoading,
+      {required this.audioModel,
       required this.audioPosition,
       required this.title,
       required this.composer,
       required this.artwork});
 
   @override
-  final bool isPlaying;
-  @override
-  final bool isLoading;
+  final AudioModel audioModel;
   @override
   final AudioPositionModel audioPosition;
   @override
@@ -190,7 +184,7 @@ class _$_AudioState implements _AudioState {
 
   @override
   String toString() {
-    return 'AudioState(isPlaying: $isPlaying, isLoading: $isLoading, audioPosition: $audioPosition, title: $title, composer: $composer, artwork: $artwork)';
+    return 'AudioState(audioModel: $audioModel, audioPosition: $audioPosition, title: $title, composer: $composer, artwork: $artwork)';
   }
 
   @override
@@ -198,8 +192,8 @@ class _$_AudioState implements _AudioState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_AudioState &&
-            const DeepCollectionEquality().equals(other.isPlaying, isPlaying) &&
-            const DeepCollectionEquality().equals(other.isLoading, isLoading) &&
+            const DeepCollectionEquality()
+                .equals(other.audioModel, audioModel) &&
             const DeepCollectionEquality()
                 .equals(other.audioPosition, audioPosition) &&
             const DeepCollectionEquality().equals(other.title, title) &&
@@ -210,8 +204,7 @@ class _$_AudioState implements _AudioState {
   @override
   int get hashCode => Object.hash(
       runtimeType,
-      const DeepCollectionEquality().hash(isPlaying),
-      const DeepCollectionEquality().hash(isLoading),
+      const DeepCollectionEquality().hash(audioModel),
       const DeepCollectionEquality().hash(audioPosition),
       const DeepCollectionEquality().hash(title),
       const DeepCollectionEquality().hash(composer),
@@ -225,17 +218,14 @@ class _$_AudioState implements _AudioState {
 
 abstract class _AudioState implements AudioState {
   const factory _AudioState(
-      {required final bool isPlaying,
-      required final bool isLoading,
+      {required final AudioModel audioModel,
       required final AudioPositionModel audioPosition,
       required final String? title,
       required final String? composer,
       required final String? artwork}) = _$_AudioState;
 
   @override
-  bool get isPlaying;
-  @override
-  bool get isLoading;
+  AudioModel get audioModel;
   @override
   AudioPositionModel get audioPosition;
   @override

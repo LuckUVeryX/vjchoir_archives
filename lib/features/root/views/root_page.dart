@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:vjchoir_archives/app/router.dart';
+import 'package:vjchoir_archives/features/audio/audio.dart';
 import 'package:vjchoir_archives/features/root/controller/controller.dart';
-import 'package:vjchoir_archives/features/root/views/widgets/widgets.dart';
 import 'package:vjchoir_archives/l10n/l10n.dart';
 
 class RootPage extends ConsumerWidget {

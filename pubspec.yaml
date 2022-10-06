@@ -46,6 +46,13 @@ dev_dependencies:
   mocktail: ^0.3.0
   very_good_analysis: ^3.0.2
 
+dependency_overrides:
+  just_audio:
+    git:
+      url: https://github.com/ryanheise/just_audio.git
+      path: just_audio
+      ref: feature/treadmill
+
 flutter:
   uses-material-design: true
   generate: true

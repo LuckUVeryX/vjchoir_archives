@@ -9,5 +9,6 @@ final vjchoirArchivesRepositoryProvider =
   return VjchoirArchivesRepository(
     remote: GithubVjchoirArchivesApi(),
     local: LocalVjchoirArchivesApi(ref.watch(sharedPreferencesProvider)),
+    pref: ref.watch(sharedPreferencesProvider),
   );
 });

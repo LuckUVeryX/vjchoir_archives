@@ -14,6 +14,7 @@ dependencies:
     path: ../github_vjchoir_archives_api
   local_vjchoir_archives_api: 
     path: ../local_vjchoir_archives_api
+  shared_preferences: ^2.0.15
   vjchoir_archives_api: 
     path: ../vjchoir_archives_api
 

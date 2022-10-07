@@ -82,7 +82,13 @@ class _BatchSubpageView extends StatelessWidget {
                           const ShimmerPlaceholder(aspectRatio: 1),
                     ),
                   ),
-                  listTile: ListTile(title: Text(comm.name)),
+                  listTile: ListTile(
+                    title: Text(
+                      comm.name,
+                      style: context.textTheme.titleMedium
+                          ?.copyWith(color: Colors.white),
+                    ),
+                  ),
                 ),
                 onTap: () =>
                     context.go('${Routes.batches}/${batch.id}/${comm.name}'),

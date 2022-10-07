@@ -30,6 +30,7 @@ dependencies:
     path: packages/local_vjchoir_archives_api
   palette_generator: ^0.3.3+2
   rxdart: ^0.27.5
+  shake: ^2.1.0
   shared_preferences: ^2.0.15
   shimmer: ^2.0.0
   smooth_page_indicator: ^1.0.0+2

@@ -58,7 +58,7 @@ class _SymphonyOfVoicesSubPageView extends StatelessWidget {
           ),
           pinned: true,
           floating: true,
-          expandedHeight: context.mediaQuerySize.width,
+          expandedHeight: context.mediaQuerySize.width * 3 / 4,
           flexibleSpace: FlexibleSpaceBar(
             background: CachedNetworkImage(
               imageUrl: sov.artwork,

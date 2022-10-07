@@ -19,4 +19,9 @@ class PreferencesRepository {
   static const kShowLandingKey = 'kShowLanding';
   bool get kShowLanding => _pref.getBool(kShowLandingKey) ?? true;
   set kShowLanding(bool value) => _pref.setBool(kShowLandingKey, value);
+
+  @visibleForTesting
+  static const kDarkModeKey = 'kDarkMode';
+  bool get kDarkMode => _pref.getBool(kDarkModeKey) ?? false;
+  set kDarkMode(bool value) => _pref.setBool(kDarkModeKey, value);
 }

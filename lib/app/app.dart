@@ -5,6 +5,7 @@
 // license that can be found in the LICENSE file or at
 // https://opensource.org/licenses/MIT.
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -33,10 +34,20 @@ class App extends ConsumerWidget {
         useMaterial3: true,
         colorScheme: ColorScheme.fromSeed(
           seedColor: const Color(0xFF801B42),
-          brightness:
-              ref.watch(darkThemeProvider) ? Brightness.dark : Brightness.light,
         ),
       ),
+      darkTheme: ThemeData.from(
+        useMaterial3: true,
+        colorScheme: ColorScheme.fromSeed(
+          seedColor: const Color(0xFF801B42),
+          brightness: Brightness.dark,
+        ),
+      ),
+      themeMode: !kDebugMode
+          ? ThemeMode.system
+          : ref.watch(darkThemeProvider)
+              ? ThemeMode.dark
+              : ThemeMode.light,
     );
   }
 }

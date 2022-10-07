@@ -5,8 +5,16 @@ publish_to: none
 
 environment:
   sdk: ">=2.18.0 <3.0.0"
+  flutter: ">=3.3.0"
 
 dependencies:
+  flutter:
+    sdk: flutter
+  github_vjchoir_archives_api: 
+    path: ../github_vjchoir_archives_api
+  local_vjchoir_archives_api: 
+    path: ../local_vjchoir_archives_api
+  shared_preferences: ^2.0.15
   vjchoir_archives_api: 
     path: ../vjchoir_archives_api
 

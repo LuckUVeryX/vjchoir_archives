@@ -10,10 +10,8 @@ import 'dart:developer';
 
 import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:github_vjchoir_archives_api/github_vjchoir_archives_api.dart';
 import 'package:just_audio_background/just_audio_background.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:vjchoir_archives/app/providers.dart';
 import 'package:vjchoir_archives/features/storage/storage.dart';
 
 class AppProviderObserver extends ProviderObserver {
@@ -51,10 +49,7 @@ Future<void> bootstrap(FutureOr<Widget> Function() builder) async {
       ProviderScope(
         observers: [AppProviderObserver()],
         overrides: [
-          vjchoirArchivesApiProvider
-              .overrideWithValue(GithubVjchoirArchivesApi()),
-          preferencesRepositoryProvider
-              .overrideWithValue(PreferencesRepository(pref)),
+          sharedPreferencesProvider.overrideWithValue(pref),
         ],
         child: await builder(),
       ),

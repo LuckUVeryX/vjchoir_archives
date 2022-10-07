@@ -29,6 +29,8 @@ class BatchesPage extends ConsumerWidget {
           gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 2,
             childAspectRatio: 1.5,
+            crossAxisSpacing: 4,
+            mainAxisSpacing: 4,
           ),
           itemCount: data.batches.length,
           itemBuilder: (context, index) {

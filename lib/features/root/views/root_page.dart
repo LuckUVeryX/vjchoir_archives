@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:vjchoir_archives/app/dark_theme_controller.dart';
 import 'package:vjchoir_archives/app/router.dart';
 import 'package:vjchoir_archives/features/audio/audio.dart';
 import 'package:vjchoir_archives/features/root/controller/controller.dart';
@@ -19,9 +18,6 @@ class RootPage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = context.l10n;
     return Scaffold(
-      appBar: AppBar(
-        actions: const [_ThemeToggleButton()],
-      ),
       body: Padding(
         // Account space for music player
         padding: EdgeInsets.only(
@@ -48,19 +44,6 @@ class RootPage extends ConsumerWidget {
         ],
       ),
       bottomSheet: const MusicPlayer(),
-    );
-  }
-}
-
-class _ThemeToggleButton extends ConsumerWidget {
-  const _ThemeToggleButton();
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final darkTheme = ref.watch(darkThemeProvider);
-    return IconButton(
-      onPressed: ref.read(darkThemeProvider.notifier).toggle,
-      icon: Icon(darkTheme ? FontAwesomeIcons.moon : FontAwesomeIcons.sun),
     );
   }
 }

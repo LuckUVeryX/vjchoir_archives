@@ -38,6 +38,7 @@ class LandingPage extends ConsumerWidget {
         ],
         dotsDecorator: DotsDecorator(
           activeSize: const Size(18, 9),
+          activeColor: context.colorScheme.onBackground,
           activeShape:
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
         ),

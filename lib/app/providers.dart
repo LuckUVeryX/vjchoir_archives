@@ -1,11 +1,13 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:github_vjchoir_archives_api/github_vjchoir_archives_api.dart';
+import 'package:local_vjchoir_archives_api/local_vjchoir_archives_api.dart';
+import 'package:vjchoir_archives/features/storage/storage.dart';
 import 'package:vjchoir_archives_repository/vjchoir_archives_repository.dart';
-
-final vjchoirArchivesApiProvider = Provider<VjchoirArchivesApi>((ref) {
-  throw UnimplementedError();
-});
 
 final vjchoirArchivesRepositoryProvider =
     Provider<VjchoirArchivesRepository>((ref) {
-  return VjchoirArchivesRepository(ref.watch(vjchoirArchivesApiProvider));
+  return VjchoirArchivesRepository(
+    remote: GithubVjchoirArchivesApi(),
+    local: LocalVjchoirArchivesApi(ref.watch(sharedPreferencesProvider)),
+  );
 });

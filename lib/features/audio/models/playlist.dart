@@ -6,6 +6,7 @@ part 'playlist.freezed.dart';
 @Freezed(toStringOverride: false)
 class Playlist with _$Playlist {
   const factory Playlist({
+    required String id,
     required int index,
     required String artwork,
     required List<Repertoire> repertoires,
@@ -13,6 +14,7 @@ class Playlist with _$Playlist {
 
   factory Playlist.fromSov(Sov sov, [int? index]) {
     return Playlist(
+      id: sov.abbr,
       index: index ?? 0,
       artwork: sov.artwork,
       repertoires: sov.repertoire,

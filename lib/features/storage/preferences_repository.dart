@@ -24,4 +24,11 @@ class PreferencesRepository {
   static const kDarkModeKey = 'kDarkMode';
   bool get kDarkMode => _pref.getBool(kDarkModeKey) ?? false;
   set kDarkMode(bool value) => _pref.setBool(kDarkModeKey, value);
+
+  @visibleForTesting
+  static const kAlbumPaletteKey = 'kAlbumPaletteKey';
+  List<String> get kAlbumPalette =>
+      _pref.getStringList(kAlbumPaletteKey) ?? <String>[];
+  set kAlbumPalette(List<String> value) =>
+      _pref.setStringList(kAlbumPaletteKey, value);
 }

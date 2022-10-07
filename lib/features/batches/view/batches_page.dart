@@ -24,6 +24,14 @@ class BatchesPage extends ConsumerWidget {
           context.colorScheme.secondaryContainer,
           context.colorScheme.tertiaryContainer,
         ];
+        final textColors = [
+          context.colorScheme.onPrimary,
+          context.colorScheme.onSecondary,
+          context.colorScheme.onTertiary,
+          context.colorScheme.onPrimaryContainer,
+          context.colorScheme.onSecondaryContainer,
+          context.colorScheme.onTertiaryContainer,
+        ];
 
         return GridView.builder(
           gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
@@ -64,8 +72,10 @@ class BatchesPage extends ConsumerWidget {
                     ListTile(
                       title: Text(
                         batch.name,
-                        style: context.textTheme.titleLarge
-                            ?.copyWith(fontWeight: FontWeight.bold),
+                        style: context.textTheme.titleLarge?.copyWith(
+                          fontWeight: FontWeight.bold,
+                          color: textColors[index % cardColors.length],
+                        ),
                       ),
                     ),
                   ],

@@ -16,6 +16,7 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$Playlist {
+  String get id => throw _privateConstructorUsedError;
   int get index => throw _privateConstructorUsedError;
   String get artwork => throw _privateConstructorUsedError;
   List<Repertoire> get repertoires => throw _privateConstructorUsedError;
@@ -29,7 +30,8 @@ mixin _$Playlist {
 abstract class $PlaylistCopyWith<$Res> {
   factory $PlaylistCopyWith(Playlist value, $Res Function(Playlist) then) =
       _$PlaylistCopyWithImpl<$Res>;
-  $Res call({int index, String artwork, List<Repertoire> repertoires});
+  $Res call(
+      {String id, int index, String artwork, List<Repertoire> repertoires});
 }
 
 /// @nodoc
@@ -42,11 +44,16 @@ class _$PlaylistCopyWithImpl<$Res> implements $PlaylistCopyWith<$Res> {
 
   @override
   $Res call({
+    Object? id = freezed,
     Object? index = freezed,
     Object? artwork = freezed,
     Object? repertoires = freezed,
   }) {
     return _then(_value.copyWith(
+      id: id == freezed
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
       index: index == freezed
           ? _value.index
           : index // ignore: cast_nullable_to_non_nullable
@@ -69,7 +76,8 @@ abstract class _$$_PlaylistCopyWith<$Res> implements $PlaylistCopyWith<$Res> {
           _$_Playlist value, $Res Function(_$_Playlist) then) =
       __$$_PlaylistCopyWithImpl<$Res>;
   @override
-  $Res call({int index, String artwork, List<Repertoire> repertoires});
+  $Res call(
+      {String id, int index, String artwork, List<Repertoire> repertoires});
 }
 
 /// @nodoc
@@ -84,11 +92,16 @@ class __$$_PlaylistCopyWithImpl<$Res> extends _$PlaylistCopyWithImpl<$Res>
 
   @override
   $Res call({
+    Object? id = freezed,
     Object? index = freezed,
     Object? artwork = freezed,
     Object? repertoires = freezed,
   }) {
     return _then(_$_Playlist(
+      id: id == freezed
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
       index: index == freezed
           ? _value.index
           : index // ignore: cast_nullable_to_non_nullable
@@ -109,11 +122,14 @@ class __$$_PlaylistCopyWithImpl<$Res> extends _$PlaylistCopyWithImpl<$Res>
 
 class _$_Playlist implements _Playlist {
   const _$_Playlist(
-      {required this.index,
+      {required this.id,
+      required this.index,
       required this.artwork,
       required final List<Repertoire> repertoires})
       : _repertoires = repertoires;
 
+  @override
+  final String id;
   @override
   final int index;
   @override
@@ -130,6 +146,7 @@ class _$_Playlist implements _Playlist {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_Playlist &&
+            const DeepCollectionEquality().equals(other.id, id) &&
             const DeepCollectionEquality().equals(other.index, index) &&
             const DeepCollectionEquality().equals(other.artwork, artwork) &&
             const DeepCollectionEquality()
@@ -139,6 +156,7 @@ class _$_Playlist implements _Playlist {
   @override
   int get hashCode => Object.hash(
       runtimeType,
+      const DeepCollectionEquality().hash(id),
       const DeepCollectionEquality().hash(index),
       const DeepCollectionEquality().hash(artwork),
       const DeepCollectionEquality().hash(_repertoires));
@@ -151,10 +169,13 @@ class _$_Playlist implements _Playlist {
 
 abstract class _Playlist implements Playlist {
   const factory _Playlist(
-      {required final int index,
+      {required final String id,
+      required final int index,
       required final String artwork,
       required final List<Repertoire> repertoires}) = _$_Playlist;
 
+  @override
+  String get id;
   @override
   int get index;
   @override

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:vjchoir_archives/features/audio/audio.dart';
+import 'package:vjchoir_archives/features/player_palette/player_palette.dart';
 import 'package:vjchoir_archives/utils/utils.dart';
 
 class MusicPlayer extends ConsumerWidget {
@@ -14,25 +15,34 @@ class MusicPlayer extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final state = ref.watch(audioControllerProvider);
 
+    ref.listen(audioControllerProvider, (previous, next) {
+      final oldPlaylistId =
+          previous?.whenOrNull(data: (data) => data.playlist.id);
+
+      next.whenOrNull(
+        data: (data) async {
+          if (oldPlaylistId == data.playlist.id) return;
+
+          await ref
+              .watch(playerPaletteControllerProvider.notifier)
+              .onPlaylistUpdate(data.playlist);
+        },
+      );
+    });
+
     return state.showWhen(
       data: (data) {
-        final palette = ref
-            .watch(
-              paletteGeneratorProvider(NetworkImage(data.playlist.artwork)),
-            )
-            .whenOrNull(
-              data: (data) => data.mutedColor,
-            );
+        final palette = ref.watch(playerPaletteControllerProvider);
 
         return Card(
           margin: EdgeInsets.zero,
-          color: palette?.color,
+          color: Color(palette.color),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
               ListTile(
                 dense: true,
-                textColor: palette?.titleTextColor,
+                textColor: Color(palette.textColor),
                 leading: ClipRRect(
                   borderRadius: BorderRadius.circular(4),
                   child: SizedBox.square(
@@ -73,13 +83,7 @@ class _MusicControls extends ConsumerWidget {
     final state = ref.watch(audioControllerProvider);
     return state.showWhen(
       data: (data) {
-        final palette = ref
-            .watch(
-              paletteGeneratorProvider(NetworkImage(data.playlist.artwork)),
-            )
-            .whenOrNull(
-              data: (data) => data.mutedColor,
-            );
+        final palette = ref.watch(playerPaletteControllerProvider);
 
         final isPlaying = data.audioModel.maybeWhen(
           orElse: () => false,
@@ -92,7 +96,7 @@ class _MusicControls extends ConsumerWidget {
                   ref.read(audioControllerProvider.notifier).seekToPrevious,
               icon: Icon(
                 FontAwesomeIcons.backward,
-                color: palette?.titleTextColor,
+                color: Color(palette.textColor),
               ),
             ),
             IconButton(
@@ -107,12 +111,12 @@ class _MusicControls extends ConsumerWidget {
                 loading: () => SizedBox.square(
                   dimension: 24,
                   child: CircularProgressIndicator(
-                    color: palette?.titleTextColor,
+                    color: Color(palette.textColor),
                   ),
                 ),
                 orElse: () => Icon(
                   isPlaying ? FontAwesomeIcons.pause : FontAwesomeIcons.play,
-                  color: palette?.titleTextColor,
+                  color: Color(palette.textColor),
                 ),
               ),
             ),
@@ -120,7 +124,7 @@ class _MusicControls extends ConsumerWidget {
               onPressed: ref.read(audioControllerProvider.notifier).seekToNext,
               icon: Icon(
                 FontAwesomeIcons.forward,
-                color: palette?.titleTextColor,
+                color: Color(palette.textColor),
               ),
             ),
           ],

@@ -66,7 +66,7 @@ void main() {
         test('should update with the correct value', () {
           when(
             () => pref.setBool(PreferencesRepository.kShowLandingKey, any()),
-          ).thenAnswer((_) async => false);
+          ).thenAnswer((_) async => true);
 
           createSubject().kShowLanding = false;
           verify(
@@ -124,7 +124,7 @@ void main() {
         test('should update with the correct value', () {
           when(
             () => pref.setBool(PreferencesRepository.kDarkModeKey, any()),
-          ).thenAnswer((_) async => false);
+          ).thenAnswer((_) async => true);
 
           createSubject().kDarkMode = false;
           verify(
@@ -134,6 +134,63 @@ void main() {
           createSubject().kDarkMode = true;
           verify(
             () => pref.setBool(PreferencesRepository.kDarkModeKey, true),
+          ).called(1);
+        });
+      });
+    });
+    group('kAlbumPalette', () {
+      group('getter', () {
+        test('should call with the correct key', () {
+          createSubject().kAlbumPalette;
+
+          verify(
+            () => pref.getStringList(PreferencesRepository.kAlbumPaletteKey),
+          ).called(1);
+        });
+
+        test('should return empty list when no preferences saved', () {
+          when(() => pref.getStringList(PreferencesRepository.kAlbumPaletteKey))
+              .thenReturn(null);
+
+          expect(createSubject().kAlbumPalette, <String>[]);
+        });
+
+        test('should return correct value when preferences saved', () {
+          when(() => pref.getStringList(PreferencesRepository.kAlbumPaletteKey))
+              .thenReturn(['1', '2', '3']);
+
+          expect(createSubject().kAlbumPalette, ['1', '2', '3']);
+        });
+      });
+
+      group('setter', () {
+        test('should call with the correct key', () {
+          try {
+            createSubject().kAlbumPalette = ['1', '2', '3'];
+          } catch (_) {}
+
+          verify(
+            () => pref.setStringList(
+              PreferencesRepository.kAlbumPaletteKey,
+              any(),
+            ),
+          ).called(1);
+        });
+
+        test('should update with the correct value', () {
+          when(
+            () => pref.setStringList(
+              PreferencesRepository.kAlbumPaletteKey,
+              any(),
+            ),
+          ).thenAnswer((_) async => true);
+
+          createSubject().kAlbumPalette = ['1', '2', '3'];
+          verify(
+            () => pref.setStringList(
+              PreferencesRepository.kAlbumPaletteKey,
+              ['1', '2', '3'],
+            ),
           ).called(1);
         });
       });

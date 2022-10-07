@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:developer';
+import 'dart:io';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:just_audio/just_audio.dart';
@@ -41,18 +42,27 @@ class AudioRepository {
     required Playlist playlist,
   }) async {
     final source = ConcatenatingAudioSource(
-      children: playlist.repertoires
-          .map(
-            (e) => AudioSource.uri(
-              Uri.parse(e.mp3),
-              tag: MediaItem(
-                id: e.name,
-                title: e.name,
-                artUri: Uri.parse(playlist.artwork),
-              ),
+      children: playlist.repertoires.map((e) {
+        if (Platform.isIOS) {
+          return AudioSource.uri(
+            Uri.parse(e.mp3),
+            tag: MediaItem(
+              id: e.name,
+              title: e.name,
+              artUri: Uri.parse(playlist.artwork),
             ),
-          )
-          .toList(),
+          );
+        } else {
+          return LockCachingAudioSource(
+            Uri.parse(e.mp3),
+            tag: MediaItem(
+              id: e.name,
+              title: e.name,
+              artUri: Uri.parse(playlist.artwork),
+            ),
+          );
+        }
+      }).toList(),
     );
     try {
       await _player.setAudioSource(source, initialIndex: playlist.index);

@@ -22,11 +22,7 @@ class AppProviderObserver extends ProviderObserver {
     Object? newValue,
     ProviderContainer container,
   ) {
-    log('''
-{
-  "provider": "${provider.name ?? provider.runtimeType}",
-  "newValue": "$newValue"
-}''');
+    log('[${provider.name ?? provider.runtimeType}] value: $newValue');
   }
 }
 

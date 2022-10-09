@@ -109,26 +109,51 @@ class _BatchSubpageView extends StatelessWidget {
                 childCount: batch.sections.length, (context, index) {
               final section = batch.sections[index];
               return Card(
-                child: Column(
-                  children: [
-                    const SizedBox(height: 8),
-                    Text(
-                      section.name,
-                      style: textTheme.titleMedium,
-                      textAlign: TextAlign.center,
-                    ),
-                    for (var i = 0; i < section.members.length; i++) ...[
-                      ListTile(
-                        visualDensity: VisualDensity.compact,
-                        dense: true,
-                        title: Text(
-                          section.members[i],
-                          style: textTheme.labelSmall,
+                child: Padding(
+                  padding: const EdgeInsets.all(12),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Align(
+                        alignment: Alignment.topCenter,
+                        child: Text(
+                          section.name,
+                          style: textTheme.titleMedium
+                              ?.copyWith(fontWeight: FontWeight.bold),
+                          textAlign: TextAlign.center,
                         ),
-                        trailing: i == 0 ? const _SlLabel() : null,
+                      ),
+                      const SizedBox(height: 8),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Flexible(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                for (var i = 0;
+                                    i < section.members.length;
+                                    i++) ...[
+                                  SizedBox(
+                                    height: 20,
+                                    child: Align(
+                                      alignment: Alignment.centerLeft,
+                                      child: Text(
+                                        section.members[i],
+                                        style: textTheme.labelSmall,
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ],
+                            ),
+                          ),
+                          const _SlLabel(),
+                        ],
                       ),
                     ],
-                  ],
+                  ),
                 ),
               );
             }),
@@ -149,7 +174,7 @@ class _SlLabel extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.symmetric(
-        horizontal: 4,
+        horizontal: 8,
         vertical: 2,
       ),
       decoration: ShapeDecoration(

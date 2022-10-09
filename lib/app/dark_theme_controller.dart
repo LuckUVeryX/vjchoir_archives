@@ -18,7 +18,7 @@ class DarkThemeController extends StateNotifier<bool> {
 
   void _init() {
     _detector =
-        ShakeDetector.autoStart(onPhoneShake: toggle, minimumShakeCount: 2);
+        ShakeDetector.autoStart(onPhoneShake: toggle, minimumShakeCount: 3);
   }
 
   @visibleForTesting

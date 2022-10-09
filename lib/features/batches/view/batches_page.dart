@@ -19,18 +19,14 @@ class BatchesPage extends ConsumerWidget {
         final cardColors = [
           context.colorScheme.primary,
           context.colorScheme.secondary,
-          context.colorScheme.tertiary,
           context.colorScheme.primaryContainer,
           context.colorScheme.secondaryContainer,
-          context.colorScheme.tertiaryContainer,
         ];
         final textColors = [
           context.colorScheme.onPrimary,
           context.colorScheme.onSecondary,
-          context.colorScheme.onTertiary,
           context.colorScheme.onPrimaryContainer,
           context.colorScheme.onSecondaryContainer,
-          context.colorScheme.onTertiaryContainer,
         ];
 
         return GridView.builder(

@@ -5,7 +5,6 @@
 // license that can be found in the LICENSE file or at
 // https://opensource.org/licenses/MIT.
 
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -32,8 +31,27 @@ class App extends ConsumerWidget {
       supportedLocales: AppLocalizations.supportedLocales,
       theme: ThemeData.from(
         useMaterial3: true,
-        colorScheme: ColorScheme.fromSeed(
-          seedColor: const Color(0xFF801B42),
+        colorScheme: const ColorScheme(
+          brightness: Brightness.light,
+          primary: Color(0xFFA3375C),
+          onPrimary: Color(0xFFFFFFFF),
+          secondary: Color(0xFF79555D),
+          onSecondary: Color(0xFFFFFFFF),
+          error: Color(0xFFBA1A1A),
+          onError: Color(0xFFFFFFFF),
+          background: Color(0xFFFFFBFF),
+          onBackground: Color(0xFF201A1B),
+          surface: Color(0xFFFFFBFF),
+          onSurface: Color(0xFF201A1B),
+          errorContainer: Color(0xFFFFDAD6),
+          onErrorContainer: Color(0xFF410002),
+          primaryContainer: Color(0xFFFFD9E1),
+          onPrimaryContainer: Color(0xFF3F001A),
+          secondaryContainer: Color(0xFFFFD9E1),
+          onSecondaryContainer: Color(0xFF2E131B),
+          surfaceVariant: Color(0xFFF3DDE1),
+          onSurfaceVariant: Color(0xFF514346),
+          outline: Color(0xFF847376),
         ),
       ),
       darkTheme: ThemeData.from(
@@ -43,11 +61,8 @@ class App extends ConsumerWidget {
           brightness: Brightness.dark,
         ),
       ),
-      themeMode: !kDebugMode
-          ? ThemeMode.system
-          : ref.watch(darkThemeProvider)
-              ? ThemeMode.dark
-              : ThemeMode.light,
+      themeMode:
+          ref.watch(darkThemeProvider) ? ThemeMode.dark : ThemeMode.light,
     );
   }
 }
